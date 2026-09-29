@@ -20,7 +20,7 @@
   "devDependencies": {
     "@types/node": "*",
     "prisma": "^5.22.0",
-    "turbo": "*",
+    "turbo": "^2.4.0",
     "typescript": "*"
   }
 }

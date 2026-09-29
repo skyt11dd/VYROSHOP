@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "main": "index.ts",
   "dependencies": {
-    "react": "*",
-    "react-dom": "*",
-    "tailwindcss": "*",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "clsx": "*",
     "tailwind-merge": "*"
   }
