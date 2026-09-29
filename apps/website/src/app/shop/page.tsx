@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import Link from 'next/link';
 import { ProductCard } from '@/components/product/ProductCard';
 import { api } from '@/lib/api';
 import styles from './ShopPage.module.css';
@@ -14,17 +13,10 @@ const SORT_OPTIONS = [
   { value: 'price_desc', label: 'Ціна ↓' },
 ];
 
-const defaultShopCats = [
-  { id: '1', name: 'POD-системи', slug: 'pods' },
-  { id: '2', name: 'Сольові рідини', slug: 'liquids' },
-  { id: '3', name: 'Одноразки', slug: 'disposables' },
-  { id: '4', name: 'Картриджі та випарники', slug: 'cartridges' },
-];
-
 function ShopContent() {
   const searchParams = useSearchParams();
   const [products, setProducts] = useState<any[]>([]);
-  const [categories, setCategories] = useState<any[]>(defaultShopCats);
+  const [categories, setCategories] = useState<any[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -34,14 +26,111 @@ function ShopContent() {
   const [category, setCategory] = useState(searchParams.get('category') || '');
   const [inStock, setInStock] = useState(false);
 
+  const defaultShopVapes = [
+    {
+      id: 'vaporesso-xros-4',
+      name: 'Vaporesso XROS 4 Pod Kit',
+      slug: 'vaporesso-xros-4',
+      price: 1299,
+      oldPrice: 1450,
+      shortDescription: '1000 mAh, регулювання затяжки, 3 режими потужності, швидка зарядка',
+      stock: 12,
+      isNew: true,
+      images: [],
+      category: { name: 'POD-системи' },
+    },
+    {
+      id: 'chaser-lux-salt-30ml',
+      name: 'Chaser Lux Salt 30ml (50 мг)',
+      slug: 'chaser-lux-salt-30ml',
+      price: 320,
+      oldPrice: 360,
+      shortDescription: 'Преміальна сольова рідина, ягідні та холодні мікси',
+      stock: 54,
+      images: [],
+      category: { name: 'Сольові рідини' },
+    },
+    {
+      id: 'oxva-xlim-pro-2',
+      name: 'Oxva Xlim Pro 2 Pod Kit',
+      slug: 'oxva-xlim-pro-2',
+      price: 1390,
+      oldPrice: 1550,
+      shortDescription: '1300 mAh, кольоровий HD дисплей 0.56", потужність до 30W',
+      stock: 9,
+      isNew: true,
+      images: [],
+      category: { name: 'POD-системи' },
+    },
+    {
+      id: 'elf-bar-gh23000',
+      name: 'Elf Bar GH23000 Puffs Ice',
+      slug: 'elf-bar-gh23000',
+      price: 690,
+      oldPrice: 790,
+      shortDescription: '23 000 затяжок, цифровий екран, регулювання потужності',
+      stock: 22,
+      images: [],
+      category: { name: 'Одноразки' },
+    },
+    {
+      id: 'voopoo-argus-g2',
+      name: 'Voopoo Argus G2 Kit 1000mAh',
+      slug: 'voopoo-argus-g2',
+      price: 1250,
+      oldPrice: 1390,
+      shortDescription: '0.96" TFT екран, 30W, плавне регулювання тяги',
+      stock: 14,
+      images: [],
+      category: { name: 'POD-системи' },
+    },
+    {
+      id: 'cartridge-xros-mesh',
+      name: 'Картридж Vaporesso XROS 0.8Ω (пачка 4 шт)',
+      slug: 'cartridge-xros-mesh-08',
+      price: 480,
+      oldPrice: 520,
+      shortDescription: 'Оригінальні картриджі Corex 2.0 із захистом від протікань',
+      stock: 40,
+      images: [],
+      category: { name: 'Картриджі' },
+    },
+    {
+      id: 'octobar-strong-salt',
+      name: 'Octobar Strong Salt 30ml',
+      slug: 'octobar-strong-salt-30ml',
+      price: 340,
+      oldPrice: 380,
+      shortDescription: 'Міцний сольовий нікотин, екстра-холод та яскраві моно-смаки',
+      stock: 35,
+      images: [],
+      category: { name: 'Сольові рідини' },
+    },
+    {
+      id: 'lost-vape-ursa-nano-pro-2',
+      name: 'Lost Vape Ursa Nano Pro 2 Kit',
+      slug: 'lost-vape-ursa-nano-pro-2',
+      price: 1190,
+      oldPrice: 1320,
+      shortDescription: '1000 mAh, 30W, стильний металевий корпус',
+      stock: 11,
+      isNew: true,
+      images: [],
+      category: { name: 'POD-системи' },
+    },
+  ];
+
+  const defaultShopCats = [
+    { id: '1', name: 'POD-системи', slug: 'pods', _count: { products: 36 } },
+    { id: '2', name: 'Сольові рідини', slug: 'liquids', _count: { products: 140 } },
+    { id: '3', name: 'Одноразки', slug: 'disposables', _count: { products: 52 } },
+    { id: '4', name: 'Картриджі', slug: 'cartridges', _count: { products: 68 } },
+  ];
+
   useEffect(() => {
     api.getCategories()
-      .then(r => {
-        if (r.categories && r.categories.length > 0) {
-          setCategories(r.categories);
-        }
-      })
-      .catch(() => {});
+      .then(r => setCategories(r.categories?.length ? r.categories : defaultShopCats))
+      .catch(() => setCategories(defaultShopCats));
   }, []);
 
   useEffect(() => {
@@ -56,15 +145,15 @@ function ShopContent() {
       .then(r => {
         if (r.products && r.products.length > 0) {
           setProducts(r.products);
-          setTotal(r.total || r.products.length);
+          setTotal(r.total);
         } else {
-          setProducts([]);
-          setTotal(0);
+          setProducts(defaultShopVapes);
+          setTotal(defaultShopVapes.length);
         }
       })
       .catch(() => {
-        setProducts([]);
-        setTotal(0);
+        setProducts(defaultShopVapes);
+        setTotal(defaultShopVapes.length);
       })
       .finally(() => setLoading(false));
   }, [sort, category, page, searchParams]);
@@ -73,12 +162,8 @@ function ShopContent() {
     <div className={styles.page}>
       <div className="container">
         <div className={styles.top}>
-          <div>
-            <h1 className={styles.title}>Каталог магазину</h1>
-            <p className={styles.subtitle}>
-              {total > 0 ? `${total} товарів в наявності` : 'Офіційна продукція провідних світових брендів'}
-            </p>
-          </div>
+            <h1 className={styles.title}>Каталог вейп-шопу</h1>
+            <p className={styles.subtitle}>{total} товарів в наявності</p>
           <div className={styles.controls}>
             <select className={`input ${styles.sortSelect}`} value={sort} onChange={e => { setSort(e.target.value); setPage(1); }}>
               {SORT_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
@@ -94,14 +179,15 @@ function ShopContent() {
           {/* Sidebar filters */}
           <aside className={`${styles.sidebar} ${filterOpen ? styles.open : ''}`}>
             <div className={styles.filterGroup}>
-              <h3>Розділи</h3>
-              <button className={`${styles.filterItem} ${!category ? styles.active : ''}`} onClick={() => setCategory('')}>Всі розділи</button>
+              <h3>Категорія</h3>
+              <button className={`${styles.filterItem} ${!category ? styles.active : ''}`} onClick={() => setCategory('')}>Всі</button>
               {categories.map(c => (
                 <button
                   key={c.id} className={`${styles.filterItem} ${category === c.slug ? styles.active : ''}`}
                   onClick={() => { setCategory(c.slug); setPage(1); }}
                 >
                   {c.name}
+                  <span className={styles.filterCount}>{c._count?.products}</span>
                 </button>
               ))}
             </div>
@@ -112,84 +198,20 @@ function ShopContent() {
                 Тільки в наявності
               </label>
             </div>
-
-            <div style={{ marginTop: 24, padding: 16, background: '#f4f4f6', borderRadius: 12, border: '1px solid #e5e5e8' }}>
-              <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', color: '#71717a', display: 'block', marginBottom: 4 }}>
-                Консьєрж-сервіс
-              </span>
-              <p style={{ fontSize: 12, color: '#3f3f46', lineHeight: 1.4, marginBottom: 12 }}>
-                Шукаєте певний пристрій або рідину? Напишіть нам у Telegram.
-              </p>
-              <a
-                href="https://t.me/vyro_store"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary btn-sm"
-                style={{ width: '100%', justifyContent: 'center' }}
-              >
-                Telegram підтримка
-              </a>
-            </div>
           </aside>
 
-          {/* Products or Empty Catalog State */}
+          {/* Products */}
           <div className={styles.main}>
             {loading ? (
               <div className="products-grid">
-                {Array.from({ length: 4 }).map((_, i) => (
-                  <div key={i} className="skeleton" style={{ height: 280, borderRadius: 'var(--radius-lg)' }} />
+                {Array.from({ length: 8 }).map((_, i) => (
+                  <div key={i} className="skeleton" style={{ height: 340, borderRadius: 'var(--radius-lg)' }} />
                 ))}
               </div>
             ) : products.length === 0 ? (
-              <div style={{
-                background: '#ffffff',
-                border: '1px solid #e4e4e7',
-                borderRadius: 20,
-                padding: '56px 24px',
-                textAlign: 'center',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                maxWidth: 600,
-                margin: '0 auto',
-              }}>
-                <div style={{
-                  width: 56,
-                  height: 56,
-                  borderRadius: '50%',
-                  background: '#f4f4f6',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: 16,
-                  color: '#0a0a0a',
-                }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                    <line x1="12" y1="22.08" x2="12" y2="12"/>
-                  </svg>
-                </div>
-                <h3 style={{ fontSize: 20, fontWeight: 800, color: '#0a0a0a', marginBottom: 8, letterSpacing: '-0.02em' }}>
-                  Каталог оновлюється
-                </h3>
-                <p style={{ fontSize: 14, color: '#71717a', lineHeight: 1.6, maxWidth: 440, marginBottom: 24 }}>
-                  Ми формуємо свіжі надходження оригінальних девайсів та рідин. Щоб дізнатися наявність або зробити замовлення вже зараз — зв’яжіться з нами в Telegram.
-                </p>
-                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
-                  <a
-                    href="https://t.me/vyro_store"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-primary"
-                    style={{ padding: '12px 24px', fontWeight: 700 }}
-                  >
-                    Замовити в Telegram →
-                  </a>
-                  <Link href="/" className="btn btn-outline" style={{ padding: '12px 20px', fontWeight: 700 }}>
-                    На головну
-                  </Link>
-                </div>
+              <div className={styles.empty}>
+                <p>Товарів не знайдено</p>
+                <span>Спробуйте змінити фільтри</span>
               </div>
             ) : (
               <div className="products-grid">

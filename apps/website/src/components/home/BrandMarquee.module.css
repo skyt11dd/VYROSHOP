@@ -1,45 +1,34 @@
 .section {
-  padding: 24px 0;
-  border-bottom: 1px solid #e8e8ea;
-  background: #ffffff;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: #fafafa;
 }
 
 .wrapper {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 28px;
   overflow: hidden;
-}
-
-.labelGroup {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #0a0a0a;
 }
 
 .title {
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   color: #71717a;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .track {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 36px;
   overflow-x: auto;
   scrollbar-width: none;
+  -ms-overflow-style: none;
   width: 100%;
 }
 
@@ -47,30 +36,27 @@
   display: none;
 }
 
-.brandBadge {
-  font-size: 12px;
+.brandItem {
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  color: #3f3f46;
-  background: #f4f4f6;
-  border: 1px solid #e5e5e8;
-  padding: 6px 14px;
-  border-radius: 999px;
+  letter-spacing: 0.06em;
+  color: #71717a;
   white-space: nowrap;
-  transition: all 0.15s ease;
+  transition: color var(--transition);
   cursor: default;
 }
 
-.brandBadge:hover {
-  background: #0a0a0a;
-  color: #ffffff;
-  border-color: #0a0a0a;
+.brandItem:hover {
+  color: #09090b;
 }
 
 @media (max-width: 768px) {
   .wrapper {
     flex-direction: column;
     align-items: flex-start;
-    gap: 14px;
+    gap: 12px;
+  }
+  .track {
+    gap: 24px;
   }
 }
