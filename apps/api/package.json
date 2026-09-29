@@ -18,7 +18,8 @@
     "dotenv": "latest",
     "@vyro/database": "*",
     "@vyro/types": "*",
-    "@vyro/validation": "*"
+    "@vyro/validation": "*",
+    "telegraf": "latest"
   },
   "devDependencies": {
     "typescript": "latest",

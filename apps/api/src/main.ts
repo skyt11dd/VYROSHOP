@@ -39,6 +39,10 @@ fastify.register(jwt, {
 
 fastify.register(websocket);
 
+// Initialize Telegram Bot
+import { initBot } from './telegram';
+initBot();
+
 // Health check
 fastify.get('/api/health', async () => {
   return { status: 'ok', service: 'vyro-api', timestamp: new Date().toISOString() };
