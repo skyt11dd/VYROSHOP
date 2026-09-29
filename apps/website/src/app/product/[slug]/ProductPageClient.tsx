@@ -3,7 +3,8 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCart } from '@/contexts/CartContext';
-import { ProductCard, getCardImage } from '@/components/product/ProductCard';
+import { ProductCard } from '@/components/product/ProductCard';
+import { ProductIllustration } from '@/components/product/ProductIllustration';
 import { formatPrice } from '@/lib/format';
 import styles from './ProductPage.module.css';
 
@@ -47,10 +48,13 @@ export function ProductPageClient({ product, related }: { product: any; related:
           {/* Gallery */}
           <div className={styles.gallery}>
             <div className={styles.mainImage}>
-              {(() => {
-                const imgUrl = product.images?.[activeImage]?.url || getCardImage(product);
-                return <Image src={imgUrl} alt={product.name} fill style={{ objectFit: 'contain', padding: '16px' }} priority />;
-              })()}
+              {product.images?.[activeImage]?.url && !product.images[activeImage].url.includes('/images/') ? (
+                <Image src={product.images[activeImage].url} alt={product.name} fill style={{ objectFit: 'contain' }} />
+              ) : (
+                <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fafafa' }}>
+                  <ProductIllustration category={product.category?.name} name={product.name} />
+                </div>
+              )}
               {discount && <span className={`badge badge-accent ${styles.discount}`}>-{discount}%</span>}
             </div>
             {product.images?.length > 1 && (

@@ -1,4 +1,3 @@
-'use client';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './Hero.module.css';
@@ -7,171 +6,148 @@ export function Hero() {
   return (
     <section className={styles.hero}>
       <div className="container">
-        {/* Main Promo Grid */}
-        <div className={styles.promoGrid}>
-          {/* Main Hero Banner: Vaporesso XROS 4 */}
-          <div className={styles.mainBanner}>
-            <div className={styles.mainContent}>
-              <div className={styles.badgeRow}>
-                <span className={styles.saleBadge}>🔥 ХІТ ПРОДАЖІВ 2026</span>
-                <span className={styles.guaranteeBadge}>100% Оригінал</span>
-              </div>
-
-              <h1 className={styles.title}>
-                Vaporesso XROS 4 <br className={styles.breakOnDesktop} />& XROS Pro
-              </h1>
-
-              <p className={styles.subtitle}>
-                Оновлені картриджі Corex 2.0 із захистом від протікань, акумулятор 1000 mAh, регулювання затяжки та надшвидка зарядка Type-C за 30 хв.
-              </p>
-
-              <div className={styles.priceRow}>
-                <div className={styles.pricing}>
-                  <span className={styles.currentPrice}>від 990 ₴</span>
-                  <span className={styles.oldPrice}>1 190 ₴</span>
-                </div>
-                <span className={styles.discountBadge}>-17% знижка</span>
-              </div>
-
-              <div className={styles.ctaRow}>
-                <Link href="/product/vaporesso-xros-4" className={styles.btnPrimary}>
-                  Купити зі знижкою →
-                </Link>
-                <Link href="/shop?category=pods" className={styles.btnSecondary}>
-                  Всі POD-системи
-                </Link>
-              </div>
-
-              <div className={styles.features}>
-                <span className={styles.featureItem}>✓ Скретч-код перевірки</span>
-                <span className={styles.featureItem}>✓ Відправка сьогодні</span>
-                <span className={styles.featureItem}>✓ Гарантія якості</span>
-              </div>
+        <div className={styles.grid}>
+          {/* Left Editorial Content */}
+          <div className={styles.left}>
+            <div className={styles.badgeWrap}>
+              <span className={styles.ageBadge}>18+</span>
+              <span className={styles.badgeText}>Оригінальна вейп-продукція · Тільки перевірені бренди</span>
             </div>
 
-            <div className={styles.mainImageWrapper}>
-              <div className={styles.imageStage}>
-                <Image
-                  src="/images/xros4.jpg"
-                  alt="Vaporesso XROS 4 Pod Kit"
-                  fill
-                  priority
-                  className={styles.bannerImage}
-                  sizes="(max-width: 1024px) 100vw, 45vw"
-                />
-                <div className={styles.deviceSticker}>
-                  <span className={styles.stickerTitle}>Vaporesso XROS 4</span>
-                  <span className={styles.stickerDesc}>Оригінальний комплект</span>
+            <h1 className={styles.title}>
+              Преміальні POD-системи та сольові рідини
+            </h1>
+
+            <p className={styles.subtitle}>
+              Оригінальні пристрої, перевірені сольові мікси та фірмові змінні картриджі від світових виробників. Швидка відправка в день замовлення по всій Україні.
+            </p>
+
+            <div className={styles.cta}>
+              <Link href="/shop" className={styles.ctaPrimary}>
+                Перейти до каталогу →
+              </Link>
+              <Link href="/shop?category=pods" className={styles.ctaOutline}>
+                POD-системи
+              </Link>
+            </div>
+
+            <div className={styles.infoRow}>
+              <div className={styles.infoItem}>
+                <svg className={styles.infoIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <path d="m9 12 2 2 4-4"/>
+                </svg>
+                <div className={styles.infoText}>
+                  <span className={styles.infoTitle}>100% Оригінал</span>
+                  <span className={styles.infoDesc}>Захисні коди перевірки</span>
                 </div>
               </div>
-            </div>
-          </div>
 
-          {/* Side Promo Column: 2 Deals */}
-          <div className={styles.sideStack}>
-            {/* Promo 1: Сольові рідини */}
-            <Link href="/shop?category=liquids" className={styles.sideCard}>
-              <div className={styles.sideContent}>
-                <span className={styles.sideTag}>ТОП РІДИНИ</span>
-                <h3 className={styles.sideTitle}>Chaser Lux & Octobar Salt</h3>
-                <p className={styles.sideDesc}>50+ яскравих холодних та фруктових смаків</p>
-                <div className={styles.sideBottom}>
-                  <span className={styles.sidePrice}>від 180 ₴</span>
-                  <span className={styles.sideBtn}>Обрати смак →</span>
+              <div className={styles.infoDivider} />
+
+              <div className={styles.infoItem}>
+                <svg className={styles.infoIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
+                <div className={styles.infoText}>
+                  <span className={styles.infoTitle}>Відправка щодня</span>
+                  <span className={styles.infoDesc}>Нова Пошта 1-2 дні</span>
                 </div>
               </div>
-              <div className={styles.sideImageWrapper}>
-                <Image
-                  src="/images/chaser-salt.jpg"
-                  alt="Сольові рідини Chaser"
-                  fill
-                  className={styles.sideImage}
-                  sizes="(max-width: 1024px) 30vw, 15vw"
-                />
-              </div>
-            </Link>
 
-            {/* Promo 2: Одноразки */}
-            <Link href="/shop?category=disposables" className={styles.sideCard}>
-              <div className={styles.sideContent}>
-                <span className={styles.sideTag}>ДО 23 000 ЗАТЯЖОК</span>
-                <h3 className={styles.sideTitle}>Elf Bar GH23000 & Vozol</h3>
-                <p className={styles.sideDesc}>З цифровим дисплеєм залишку заряду та рідини</p>
-                <div className={styles.sideBottom}>
-                  <span className={styles.sidePrice}>від 590 ₴</span>
-                  <span className={styles.sideBtn}>Переглянути →</span>
+              <div className={styles.infoDivider} />
+
+              <div className={styles.infoItem}>
+                <svg className={styles.infoIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <div className={styles.infoText}>
+                  <span className={styles.infoTitle}>Тільки 18+</span>
+                  <span className={styles.infoDesc}>Відповідальний продаж</span>
                 </div>
               </div>
-              <div className={styles.sideImageWrapper}>
-                <Image
-                  src="/images/elfbar-disposable.jpg"
-                  alt="Одноразки Elf Bar"
-                  fill
-                  className={styles.sideImage}
-                  sizes="(max-width: 1024px) 30vw, 15vw"
-                />
+            </div>
+          </div>
+
+          {/* Right Luxury Onyx Card */}
+          <div className={styles.right}>
+            <div className={styles.heroVisual}>
+              <div className={styles.brandCard}>
+                <div className={styles.cardTop}>
+                  <span className={styles.cardTag}>VYRO FLAGSHIP 2026</span>
+                  <span className={styles.cardAvailability}>В наявності</span>
+                </div>
+
+                <div className={styles.showcaseStage}>
+                  <div className={styles.deviceWrapper}>
+                    {/* High Precision Signature VYRO Pod Silhouette */}
+                    <svg width="68" height="144" viewBox="0 0 68 144" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="podBodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#2c2c30" />
+                          <stop offset="50%" stopColor="#18181b" />
+                          <stop offset="100%" stopColor="#0d0d0f" />
+                        </linearGradient>
+                        <linearGradient id="podCartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stopColor="#52525b" stopOpacity="0.8" />
+                          <stop offset="100%" stopColor="#27272a" stopOpacity="0.9" />
+                        </linearGradient>
+                        <filter id="ledGlow" x="-50%" y="-50%" width="200%" height="200%">
+                          <feGaussianBlur stdDeviation="3" result="blur" />
+                          <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                          </feMerge>
+                        </filter>
+                      </defs>
+
+                      {/* Translucent Pod Cartridge */}
+                      <path d="M21 12C21 4 27 0 34 0C41 0 47 4 47 12V34H21V12Z" fill="url(#podCartGrad)" />
+                      <line x1="26" y1="18" x2="42" y2="18" stroke="#a1a1aa" strokeWidth="1.2" strokeLinecap="round" opacity="0.6" />
+                      
+                      {/* Metal/Alloy Device Body */}
+                      <rect x="15" y="34" width="38" height="106" rx="7" fill="url(#podBodyGrad)" stroke="#3f3f46" strokeWidth="1" />
+
+                      {/* Signature glowing vertical LED slit */}
+                      <rect x="32.5" y="58" width="3" height="20" rx="1.5" fill="#ffffff" filter="url(#ledGlow)" />
+
+                      {/* Minimal VYRO wordmark outline */}
+                      <rect x="29" y="124" width="10" height="2.5" rx="1" fill="#71717a" opacity="0.8" />
+                    </svg>
+                  </div>
+                </div>
+
+                <div className={styles.specsGrid}>
+                  <div className={styles.specBox}>
+                    <span className={styles.specVal}>1000 mAh</span>
+                    <span className={styles.specLabel}>Акумулятор</span>
+                  </div>
+                  <div className={styles.specBox}>
+                    <span className={styles.specVal}>Mesh 0.8Ω</span>
+                    <span className={styles.specLabel}>Corex 2.0</span>
+                  </div>
+                  <div className={styles.specBox}>
+                    <span className={styles.specVal}>Type-C 30m</span>
+                    <span className={styles.specLabel}>Швидка зарядка</span>
+                  </div>
+                  <div className={styles.specBox}>
+                    <span className={styles.specVal}>Top-Fill</span>
+                    <span className={styles.specLabel}>Без протікань</span>
+                  </div>
+                </div>
+
+                <div className={styles.cardBottom}>
+                  <div>
+                    <span className={styles.priceLabel}>Оригінальний комплект</span>
+                    <span className={styles.cardPrice}>від 890 ₴</span>
+                  </div>
+                  <Link href="/shop?category=pods" className={styles.orderBtn}>
+                    Обрати пристрій →
+                  </Link>
+                </div>
               </div>
-            </Link>
-          </div>
-        </div>
-
-        {/* Real Vape Shop Trust Strip */}
-        <div className={styles.trustStrip}>
-          <div className={styles.trustItem}>
-            <div className={styles.trustIconWrap}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                <path d="m9 12 2 2 4-4"/>
-              </svg>
-            </div>
-            <div>
-              <strong className={styles.trustTitle}>100% Оригінальна продукція</strong>
-              <span className={styles.trustDesc}>Скретч-коди перевірки на кожній пачці</span>
-            </div>
-          </div>
-
-          <div className={styles.trustDivider} />
-
-          <div className={styles.trustItem}>
-            <div className={styles.trustIconWrap}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-              </svg>
-            </div>
-            <div>
-              <strong className={styles.trustTitle}>Відправка Новою Поштою щодня</strong>
-              <span className={styles.trustDesc}>Замовлення до 18:00 їдуть сьогодні</span>
-            </div>
-          </div>
-
-          <div className={styles.trustDivider} />
-
-          <div className={styles.trustItem}>
-            <div className={styles.trustIconWrap}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
-                <line x1="1" y1="10" x2="23" y2="10"/>
-              </svg>
-            </div>
-            <div>
-              <strong className={styles.trustTitle}>Оплата при отриманні</strong>
-              <span className={styles.trustDesc}>Післяплата або онлайн без комісій</span>
-            </div>
-          </div>
-
-          <div className={styles.trustDivider} />
-
-          <div className={styles.trustItem}>
-            <div className={styles.trustIconWrap}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="12" y1="8" x2="12" y2="12"/>
-                <line x1="12" y1="16" x2="12.01" y2="16"/>
-              </svg>
-            </div>
-            <div>
-              <strong className={styles.trustTitle}>Суворо для повнолітніх (18+)</strong>
-              <span className={styles.trustDesc}>Відповідальний офіційний продаж</span>
             </div>
           </div>
         </div>

@@ -1,56 +1,73 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import styles from './CategoriesSection.module.css';
 
 const categoriesList = [
   {
     slug: 'pods',
     title: 'POD-системи',
-    tag: '36 моделей',
-    price: 'від 590 ₴',
-    desc: 'Vaporesso, OXVA, Voopoo, Lost Vape',
-    image: '/images/xlim-pro.jpg',
+    tag: 'Багаторазові',
+    desc: 'Vaporesso, Voopoo, Oxva, Geekvape, Lost Vape',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="7" y="7" width="10" height="15" rx="3" />
+        <path d="M10 7V4a2 2 0 0 1 4 0v3" />
+        <line x1="12" y1="12" x2="12" y2="15" />
+      </svg>
+    ),
   },
   {
     slug: 'liquids',
     title: 'Сольові рідини',
-    tag: '140+ смаків',
-    price: 'від 180 ₴',
-    desc: 'Chaser, Octobar, Hype, Flavorlab, 25-50 мг',
-    image: '/images/chaser-salt.jpg',
+    tag: 'Salt 25/50 мг',
+    desc: 'Chaser, Octobar, Hype, Alchemist, Marvellous',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M10 2h4" />
+        <path d="M12 2v4" />
+        <rect x="6" y="6" width="12" height="16" rx="3" />
+        <path d="M12 11c-1.5 1.5-1.5 3 0 4.5s1.5-3 0-4.5z" fill="currentColor" stroke="none" />
+      </svg>
+    ),
   },
   {
     slug: 'disposables',
     title: 'Одноразки',
-    tag: 'до 25 000 тяг',
-    price: 'від 290 ₴',
-    desc: 'Elf Bar, Lost Mary, Vozol, HQD з екранами',
-    image: '/images/elfbar-disposable.jpg',
+    tag: 'Топ пристрої',
+    desc: 'Elf Bar, Lost Mary, Vozol, HQD до 25 000 тяг',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="8" y="2" width="8" height="20" rx="4" />
+        <circle cx="12" cy="18" r="1.5" fill="currentColor" stroke="none" />
+      </svg>
+    ),
   },
   {
     slug: 'cartridges',
     title: 'Картриджі та випарники',
-    tag: 'Оригінал',
-    price: 'від 120 ₴',
-    desc: 'Оригінальні картриджі Corex 2.0, Ursa, Xlim',
-    image: '/images/cartridge-pack.jpg',
+    tag: 'Розхідники',
+    desc: 'Оригінальні картриджі до всіх популярних пристроїв',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="6" y="3" width="12" height="18" rx="2" />
+        <line x1="6" y1="9" x2="18" y2="9" />
+        <circle cx="12" cy="15" r="2" />
+      </svg>
+    ),
   },
 ];
 
 export function CategoriesSection({ categories }: { categories?: any[] }) {
   return (
-    <section className="section" style={{ background: '#f9f9fb', borderBottom: '1px solid var(--border)' }}>
+    <section className="section" style={{ background: '#f8f8fa', borderBottom: '1px solid var(--border)' }}>
       <div className="container">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '24px', flexWrap: 'wrap', gap: '16px' }}>
+        <div className="section-heading" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
           <div>
-            <span style={{ fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#71717a', marginBottom: '6px', display: 'block' }}>
-              Каталог продукції
+            <span style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)', marginBottom: 4, display: 'block' }}>
+              Каталог
             </span>
-            <h2 style={{ fontSize: 'clamp(24px, 3.2vw, 34px)', fontWeight: 800, letterSpacing: '-0.025em', color: '#09090b', margin: 0 }}>
-              Основні категорії
-            </h2>
+            <h2>Основні категорії</h2>
           </div>
-          <Link href="/shop" className="btn btn-outline" style={{ fontSize: 13, padding: '9px 18px', fontWeight: 700, borderRadius: 8 }}>
+          <Link href="/shop" className="btn btn-outline" style={{ fontSize: 13, padding: '8px 16px' }}>
             Всі категорії →
           </Link>
         </div>
@@ -58,26 +75,17 @@ export function CategoriesSection({ categories }: { categories?: any[] }) {
         <div className={styles.grid}>
           {categoriesList.map((cat) => (
             <Link key={cat.slug} href={`/shop?category=${cat.slug}`} className={styles.card}>
-              <div className={styles.imageBox}>
-                <Image
-                  src={cat.image}
-                  alt={cat.title}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className={styles.image}
-                />
-                <span className={styles.tagBadge}>{cat.tag}</span>
+              <div className={styles.cardHeader}>
+                <div className={styles.iconBox}>{cat.icon}</div>
+                <span className={styles.badge}>{cat.tag}</span>
               </div>
-              <div className={styles.body}>
-                <div className={styles.titleRow}>
-                  <h3 className={styles.title}>{cat.title}</h3>
-                  <span className={styles.price}>{cat.price}</span>
-                </div>
+              <div className={styles.cardBody}>
+                <h3 className={styles.title}>{cat.title}</h3>
                 <p className={styles.desc}>{cat.desc}</p>
-                <div className={styles.linkText}>
-                  <span>Перейти до каталогу</span>
-                  <span className={styles.arrow}>→</span>
-                </div>
+              </div>
+              <div className={styles.cardFooter}>
+                <span className={styles.linkText}>Перейти</span>
+                <span className={styles.arrow}>→</span>
               </div>
             </Link>
           ))}

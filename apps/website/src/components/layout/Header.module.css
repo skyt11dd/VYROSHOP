@@ -4,107 +4,31 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background: #ffffff;
-  border-bottom: 1px solid #e4e4e7;
-  transition: box-shadow 0.2s ease;
+  height: var(--header-height);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.2s ease;
 }
 
-.scrolled {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-}
-
-/* 1. Top Bar */
-.topBar {
-  background: #09090b;
-  color: #a1a1aa;
-  font-size: 11px;
-  padding: 6px 0;
-  border-bottom: 1px solid #27272a;
-}
-
-.topBarInner {
+.inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.topBarLeft {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.topNotice {
-  color: #e4e4e7;
-  font-weight: 500;
-}
-
-.topNotice strong {
-  color: #ffffff;
-  font-weight: 700;
-}
-
-.dot {
-  color: #52525b;
-}
-
-.topBarRight {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-shrink: 0;
-}
-
-.tgLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: #38bdf8;
-  text-decoration: none;
-  font-weight: 600;
-  transition: opacity 0.15s ease;
-}
-
-.tgLink:hover {
-  opacity: 0.8;
-}
-
-.workHours {
-  color: #71717a;
-}
-
-/* 2. Main Bar */
-.mainBar {
-  padding: 12px 0;
-  border-bottom: 1px solid #f4f4f5;
-}
-
-.mainBarInner {
-  display: flex;
-  align-items: center;
+  height: 100%;
   gap: 24px;
-}
-
-.menuBtn {
-  display: none;
-  background: transparent;
-  border: none;
-  color: #09090b;
-  cursor: pointer;
-  padding: 4px;
-  border-radius: 6px;
 }
 
 .logoLink {
   display: flex;
   align-items: center;
-  gap: 8px;
   text-decoration: none;
   flex-shrink: 0;
+  transition: opacity var(--transition);
+}
+
+.logoLink:hover {
+  opacity: 0.8;
 }
 
 .logoWrapper {
@@ -113,234 +37,83 @@
 }
 
 .logoImg {
-  width: 120px;
+  width: 116px;
   height: 32px;
   object-fit: contain;
   display: block;
 }
 
 .ageBadge {
-  font-size: 10px;
-  font-weight: 800;
-  color: #ffffff;
-  background: #09090b;
-  padding: 2px 6px;
-  border-radius: 4px;
-  letter-spacing: 0.05em;
-}
-
-/* Search Bar */
-.searchBar {
-  flex: 1;
-  max-width: 580px;
-  height: 42px;
-  background: #f4f4f5;
-  border: 1px solid #e4e4e7;
-  border-radius: 10px;
-  padding: 0 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.searchBar:hover {
-  background: #ffffff;
-  border-color: #09090b;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
-
-.searchIcon {
-  color: #71717a;
-  flex-shrink: 0;
-}
-
-.searchPlaceholder {
-  font-size: 13px;
-  color: #71717a;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  flex: 1;
-}
-
-.searchKbd {
-  font-size: 10px;
-  font-family: inherit;
+  font-size: 11px;
   font-weight: 700;
   color: #71717a;
-  background: #ffffff;
-  border: 1px solid #d4d4d8;
+  background: #f4f4f5;
+  border: 1px solid #e4e4e7;
   padding: 2px 6px;
   border-radius: 4px;
+  letter-spacing: 0.04em;
   flex-shrink: 0;
 }
 
-/* User Actions */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  margin-left: 8px;
+}
+
+.navLink {
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  color: #52525b;
+  transition: all var(--transition);
+}
+
+.navLink:hover {
+  color: #09090b;
+  background: #f4f4f5;
+}
+
 .actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 6px;
   margin-left: auto;
+  flex-shrink: 0;
 }
 
-.actionBtn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  color: #09090b;
-  text-decoration: none;
-  padding: 4px 8px;
-  border-radius: 8px;
-  transition: background 0.15s ease;
+.cartBtn {
   position: relative;
 }
 
-.actionBtn:hover {
-  background: #f4f4f5;
-}
-
-.actionLabel {
-  font-size: 11px;
-  font-weight: 600;
-  color: #52525b;
-}
-
-.cartActionBtn {
-  flex-direction: row;
-  gap: 10px;
-  padding: 6px 14px;
-  background: #f4f4f5;
-  border: 1px solid #e4e4e7;
-  border-radius: 10px;
-}
-
-.cartActionBtn:hover {
+.badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 17px;
+  height: 17px;
   background: #09090b;
   color: #ffffff;
-  border-color: #09090b;
-}
-
-.cartActionBtn:hover .cartTitle,
-.cartActionBtn:hover .cartTotal {
-  color: #ffffff;
-}
-
-.cartIconWrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.cartCount {
-  position: absolute;
-  top: -8px;
-  right: -10px;
-  background: #ef4444;
-  color: #ffffff;
   font-size: 10px;
-  font-weight: 800;
-  padding: 1px 5px;
+  font-weight: 700;
   border-radius: 999px;
-  min-width: 16px;
-  text-align: center;
-}
-
-.cartTextWrap {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-
-.cartTitle {
-  font-size: 11px;
-  font-weight: 600;
-  color: #71717a;
-  line-height: 1.1;
-}
-
-.cartTotal {
-  font-size: 13px;
-  font-weight: 800;
-  color: #09090b;
-  line-height: 1.2;
-}
-
-/* 3. Subnav Bar */
-.subnavBar {
-  background: #ffffff;
-  padding: 6px 0;
-}
-
-.subnavInner {
   display: flex;
   align-items: center;
+  justify-content: center;
+  padding: 0 4px;
 }
 
-.categoriesNav {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  width: 100%;
+.menuBtn {
+  display: none;
 }
 
-.catLink {
-  padding: 6px 14px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #3f3f46;
-  text-decoration: none;
-  border-radius: 6px;
-  white-space: nowrap;
-  transition: all 0.15s ease;
-}
-
-.catLink:hover {
-  background: #f4f4f5;
-  color: #09090b;
-}
-
-/* Responsive */
 @media (max-width: 1024px) {
-  .subnavBar {
-    display: none;
-  }
-  .searchKbd {
-    display: none;
-  }
-  .topBarRight {
-    display: none;
-  }
+  .nav { display: none; }
 }
 
 @media (max-width: 768px) {
-  .menuBtn {
-    display: flex;
-  }
-  .topBar {
-    display: none;
-  }
-  .searchBar {
-    display: none;
-  }
-  .actionLabel,
-  .cartTextWrap {
-    display: none;
-  }
-  .cartActionBtn {
-    padding: 8px;
-    background: transparent;
-    border: none;
-  }
-  .logoImg {
-    width: 104px;
-    height: 28px;
-  }
-  .mainBar {
-    padding: 10px 0;
-  }
+  .menuBtn { display: flex; }
 }
