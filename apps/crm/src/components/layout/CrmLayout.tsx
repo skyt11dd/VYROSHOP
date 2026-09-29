@@ -1,6 +1,7 @@
 'use client';
 import { ReactNode, useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 import styles from './CrmLayout.module.css';
 
@@ -56,7 +57,17 @@ export function CrmLayout({ children }: { children: ReactNode }) {
     <div className={styles.layout}>
       <aside className={styles.sidebar}>
         <div className={styles.brand}>
-          <Link href="/dashboard" className={styles.logo}>VYRO</Link>
+          <Link href="/dashboard" className={styles.logoLink}>
+            <Image
+              src="/logo.png"
+              alt="VYRO"
+              width={96}
+              height={26}
+              unoptimized
+              priority
+              style={{ width: '96px', height: '26px', objectFit: 'contain' }}
+            />
+          </Link>
           <span className={styles.crmLabel}>CRM</span>
         </div>
         <nav className={styles.nav}>

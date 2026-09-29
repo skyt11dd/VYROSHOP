@@ -1,3 +1,5 @@
+'use client';
+import { useState } from 'react';
 import Link from 'next/link';
 import { ProductCard } from '@/components/product/ProductCard';
 
@@ -104,24 +106,62 @@ const defaultFeaturedVapes = [
 ];
 
 export function FeaturedProducts({ products }: { products?: any[] }) {
+  const [activeTab, setActiveTab] = useState('all');
   const items = products && products.length > 0 ? products : defaultFeaturedVapes;
+
+  const filtered = activeTab === 'all'
+    ? items
+    : items.filter(p => p.category?.name?.toLowerCase().includes(activeTab.toLowerCase()));
 
   return (
     <section className="section" style={{ background: '#ffffff', borderBottom: '1px solid var(--border)' }}>
       <div className="container">
-        <div className="section-heading" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '24px' }}>
+        <div className="section-heading" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '20px', flexWrap: 'wrap', gap: '16px' }}>
           <div>
-            <span style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)', marginBottom: 4, display: 'block' }}>
+            <span style={{ fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#71717a', marginBottom: 4, display: 'block' }}>
               Топ асортименту
             </span>
-            <h2>Популярні товари</h2>
+            <h2 style={{ fontSize: 'clamp(24px, 3vw, 32px)', fontWeight: 800, letterSpacing: '-0.02em', color: '#09090b' }}>
+              Популярні товари
+            </h2>
           </div>
-          <Link href="/shop" className="btn btn-outline" style={{ fontSize: 13, padding: '8px 16px' }}>
+          <Link href="/shop" className="btn btn-outline" style={{ fontSize: 13, padding: '8px 18px', fontWeight: 600 }}>
             Весь каталог →
           </Link>
         </div>
+
+        {/* Category Tabs */}
+        <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '16px', marginBottom: '8px', scrollbarWidth: 'none' }}>
+          {[
+            { id: 'all', label: 'Всі товари' },
+            { id: 'pod', label: 'POD-системи' },
+            { id: 'рідин', label: 'Сольові рідини' },
+            { id: 'однораз', label: 'Одноразки' },
+            { id: 'картридж', label: 'Картриджі' },
+          ].map(tab => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              style={{
+                padding: '7px 16px',
+                borderRadius: '999px',
+                fontSize: '13px',
+                fontWeight: 600,
+                border: activeTab === tab.id ? '1px solid #09090b' : '1px solid #e4e4e7',
+                background: activeTab === tab.id ? '#09090b' : '#ffffff',
+                color: activeTab === tab.id ? '#ffffff' : '#52525b',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
         <div className="products-grid">
-          {items.slice(0, 8).map(p => <ProductCard key={p.id} product={p} />)}
+          {filtered.slice(0, 8).map(p => <ProductCard key={p.id} product={p} />)}
         </div>
       </div>
     </section>

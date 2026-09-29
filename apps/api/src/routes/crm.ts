@@ -53,6 +53,15 @@ export async function crmRoutes(fastify: FastifyInstance) {
     const data = req.body as any;
     const slug = data.slug || slugify(data.name, { lower: true, strict: true });
 
+    const imagesToCreate = Array.isArray(data.images)
+      ? data.images.filter(Boolean).map((img: any, idx: number) => ({
+          url: typeof img === 'string' ? img : img.url,
+          alt: typeof img === 'string' ? data.name : (img.alt || data.name),
+          sortOrder: typeof img === 'object' && img.sortOrder !== undefined ? img.sortOrder : idx,
+          isMain: idx === 0,
+        }))
+      : [];
+
     const product = await prisma.product.create({
       data: {
         name: data.name, slug, sku: data.sku,
@@ -61,7 +70,9 @@ export async function crmRoutes(fastify: FastifyInstance) {
         stock: data.stock || 0, active: data.active ?? true,
         featured: data.featured ?? false, popular: data.popular ?? false, isNew: data.isNew ?? false,
         categoryId: data.categoryId, brandId: data.brandId || null,
+        images: imagesToCreate.length ? { create: imagesToCreate } : undefined,
       },
+      include: { images: true, category: true, brand: true },
     });
 
     await prisma.auditLog.create({
@@ -80,7 +91,28 @@ export async function crmRoutes(fastify: FastifyInstance) {
     const old = await prisma.product.findUnique({ where: { id } });
     if (!old) return reply.status(404).send({ error: 'Product not found' });
 
-    const product = await prisma.product.update({ where: { id }, data });
+    const { images, ...updateFields } = data;
+
+    if (Array.isArray(images)) {
+      await prisma.productImage.deleteMany({ where: { productId: id } });
+      if (images.length > 0) {
+        await prisma.productImage.createMany({
+          data: images.filter(Boolean).map((img: any, idx: number) => ({
+            productId: id,
+            url: typeof img === 'string' ? img : img.url,
+            alt: typeof img === 'string' ? (updateFields.name || old.name) : (img.alt || updateFields.name || old.name),
+            sortOrder: typeof img === 'object' && img.sortOrder !== undefined ? img.sortOrder : idx,
+            isMain: idx === 0,
+          })),
+        });
+      }
+    }
+
+    const product = await prisma.product.update({
+      where: { id },
+      data: updateFields,
+      include: { images: true, category: true, brand: true },
+    });
     await prisma.auditLog.create({
       data: { user: user.id, action: 'PRODUCT_UPDATED', entity: 'Product', entityId: id, oldValue: JSON.stringify(old), newValue: JSON.stringify(data) },
     });

@@ -48,6 +48,12 @@ body {
   overflow-x: hidden;
 }
 
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 64px;
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;
