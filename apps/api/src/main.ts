@@ -24,10 +24,16 @@ const allowedOrigins = [
 
 fastify.register(cors, {
   origin: (origin, cb) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (
+      !origin ||
+      allowedOrigins.includes(origin) ||
+      origin.endsWith('.railway.app') ||
+      origin.endsWith('.up.railway.app') ||
+      origin.endsWith('.vercel.app')
+    ) {
       cb(null, true);
     } else {
-      cb(new Error('Not allowed by CORS'), false);
+      cb(new Error('Not allowed by CORS: ' + origin), false);
     }
   },
   credentials: true,
