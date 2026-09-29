@@ -72,7 +72,7 @@ export async function authRoutes(fastify: FastifyInstance) {
   });
 
   // Get current user (customer)
-  fastify.get('/customer/me', { preHandler: [fastify.authenticate] }, async (req, reply) => {
+  fastify.get('/customer/me', { preHandler: [(fastify as any).authenticate] }, async (req, reply) => {
     const user = (req as any).user;
     if (user.role !== 'customer') return reply.status(403).send({ error: 'Forbidden' });
 
@@ -82,7 +82,7 @@ export async function authRoutes(fastify: FastifyInstance) {
   });
 
   // Get current manager
-  fastify.get('/manager/me', { preHandler: [fastify.authenticate] }, async (req, reply) => {
+  fastify.get('/manager/me', { preHandler: [(fastify as any).authenticate] }, async (req, reply) => {
     const user = (req as any).user;
     if (!['ADMIN', 'MANAGER'].includes(user.role)) return reply.status(403).send({ error: 'Forbidden' });
 

@@ -37,6 +37,9 @@ fastify.register(jwt, {
   secret: process.env.JWT_SECRET || 'fallback_secret_change_me',
 });
 
+import authenticatePlugin from './plugins/authenticate';
+fastify.register(authenticatePlugin);
+
 fastify.register(websocket);
 
 // Initialize Telegram Bot
