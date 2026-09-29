@@ -104,9 +104,30 @@ export async function crmRoutes(fastify: FastifyInstance) {
     const original = await prisma.product.findUnique({ where: { id }, include: { images: true, tags: true } });
     if (!original) return reply.status(404).send({ error: 'Not found' });
 
-    const { id: _id, createdAt, updatedAt, slug, sku, ...rest } = original;
+    const { id: _id, createdAt, updatedAt, slug, sku, images, tags, ...rest } = original;
     const newProduct = await prisma.product.create({
-      data: { ...rest, name: `${original.name} (копія)`, slug: `${slug}-copy-${Date.now()}`, sku: `${sku}-COPY`, active: false },
+      data: {
+        ...rest,
+        name: `${original.name} (копія)`,
+        slug: `${slug}-copy-${Date.now()}`,
+        sku: `${sku}-COPY-${Date.now()}`,
+        active: false,
+        images: images?.length
+          ? {
+              create: images.map((img) => ({
+                url: img.url,
+                alt: img.alt,
+                sortOrder: img.sortOrder,
+                isMain: img.isMain,
+              })),
+            }
+          : undefined,
+        tags: tags?.length
+          ? {
+              connect: tags.map((tag) => ({ id: tag.id })),
+            }
+          : undefined,
+      },
     });
     return reply.status(201).send({ product: newProduct });
   });

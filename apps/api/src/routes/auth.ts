@@ -28,9 +28,9 @@ export async function authRoutes(fastify: FastifyInstance) {
     const { email, password } = req.body as any;
 
     const customer = await prisma.customer.findUnique({ where: { email } });
-    if (!customer || !customer.password) return reply.status(401).send({ error: 'Invalid credentials' });
+    if (!customer || !(customer as any).password) return reply.status(401).send({ error: 'Invalid credentials' });
 
-    const valid = await bcrypt.compare(password, customer.password);
+    const valid = await bcrypt.compare(password, (customer as any).password);
     if (!valid) return reply.status(401).send({ error: 'Invalid credentials' });
 
     await prisma.customer.update({ where: { id: customer.id }, data: { lastActivityAt: new Date() } });
