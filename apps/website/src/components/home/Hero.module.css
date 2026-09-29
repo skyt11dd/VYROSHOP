@@ -1,58 +1,75 @@
 .hero {
-  padding-top: calc(var(--header-height) + 40px);
-  padding-bottom: 60px;
+  padding-top: calc(var(--header-height, 70px) + 40px);
+  padding-bottom: 70px;
   background: #ffffff;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid #e8e8ea;
   position: relative;
   overflow: hidden;
 }
 
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.02) 0%, transparent 70%);
+  pointer-events: none;
+}
+
 .grid {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 48px;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 56px;
   align-items: center;
 }
 
+/* Left Column */
 .left {
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
 .badgeWrap {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #f4f4f5;
-  border: 1px solid #e4e4e7;
-  padding: 4px 10px 4px 6px;
+  background: #f4f4f6;
+  border: 1px solid #e5e5e8;
+  padding: 6px 14px;
   border-radius: 999px;
   width: fit-content;
+  margin-bottom: 24px;
 }
 
-.ageBadge {
-  font-size: 11px;
-  font-weight: 800;
-  color: #ffffff;
-  background: #09090b;
-  padding: 2px 7px;
-  border-radius: 999px;
-  letter-spacing: 0.04em;
+.statusDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #0a0a0a;
 }
 
 .badgeText {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   color: #3f3f46;
+  text-transform: uppercase;
 }
 
 .title {
-  font-size: clamp(34px, 4.4vw, 56px);
-  font-weight: 800;
-  line-height: 1.1;
+  font-size: clamp(36px, 4.4vw, 56px);
+  font-weight: 900;
+  line-height: 1.08;
   letter-spacing: -0.035em;
-  color: #09090b;
+  color: #0a0a0a;
+  margin-bottom: 20px;
+}
+
+.titleAccent {
+  color: #71717a;
+  font-weight: 800;
 }
 
 .subtitle {
@@ -60,113 +77,107 @@
   line-height: 1.6;
   color: #52525b;
   max-width: 540px;
+  margin-bottom: 32px;
 }
 
-.cta {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  padding-top: 4px;
-}
-
-.ctaPrimary {
-  background: #09090b;
-  color: #ffffff;
-  padding: 13px 28px;
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: 8px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
-  transition: all 0.18s ease;
-}
-
-.ctaPrimary:hover {
-  background: #27272a;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
-}
-
-.ctaOutline {
-  background: #ffffff;
-  color: #09090b;
-  border: 1px solid #d4d4d8;
-  padding: 13px 24px;
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: 8px;
-  transition: all 0.18s ease;
-}
-
-.ctaOutline:hover {
-  border-color: #09090b;
-  background: #f4f4f5;
-}
-
-.infoRow {
+.ctaGroup {
   display: flex;
   align-items: center;
-  gap: 20px;
-  padding-top: 24px;
-  border-top: 1px solid #f4f4f5;
-  margin-top: 8px;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
 }
 
-.infoItem {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-}
-
-.infoIcon {
-  width: 20px;
-  height: 20px;
-  color: #09090b;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.infoText {
-  display: flex;
-  flex-direction: column;
-}
-
-.infoTitle {
-  font-size: 13px;
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #0a0a0a;
+  color: #ffffff;
+  padding: 14px 28px;
+  font-size: 14px;
   font-weight: 700;
-  color: #09090b;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
 }
 
-.infoDesc {
-  font-size: 11px;
-  color: #71717a;
+.btnPrimary:hover {
+  background: #27272a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
 
-.infoDivider {
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  color: #0a0a0a;
+  border: 1px solid #d4d4d8;
+  padding: 14px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btnSecondary:hover {
+  border-color: #0a0a0a;
+  background: #f4f4f6;
+  transform: translateY(-1px);
+}
+
+.trustRow {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-top: 24px;
+  border-top: 1px solid #f0f0f2;
+  flex-wrap: wrap;
+}
+
+.trustItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #52525b;
+}
+
+.trustDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+.trustDivider {
   width: 1px;
-  height: 28px;
-  background: var(--border);
+  height: 14px;
+  background: #e4e4e7;
 }
 
-/* Right Flagship Card */
+/* Right Column: Brand Card */
 .right {
   display: flex;
   justify-content: center;
 }
 
-.heroVisual {
+.brandCard {
   width: 100%;
   max-width: 440px;
-}
-
-.brandCard {
   background: #09090b;
   border: 1px solid #27272a;
-  border-radius: 20px;
-  padding: 24px;
+  border-radius: 24px;
+  padding: 32px 28px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.25);
+  gap: 28px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
 }
@@ -174,15 +185,15 @@
 .brandCard::before {
   content: '';
   position: absolute;
-  top: -40px;
-  right: -40px;
-  width: 180px;
-  height: 180px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  top: -60px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
   pointer-events: none;
 }
 
-.cardTop {
+.cardHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -190,29 +201,28 @@
   z-index: 2;
 }
 
-.cardTag {
+.cardBadge {
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.1em;
   color: #ffffff;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 4px 9px;
-  border-radius: 4px;
+  padding: 4px 10px;
+  border-radius: 6px;
   text-transform: uppercase;
 }
 
-.cardAvailability {
+.cardStatus {
   font-size: 11px;
   font-weight: 600;
   color: #4ade80;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 
-.cardAvailability::before {
-  content: '';
+.pulseDot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -220,131 +230,134 @@
   box-shadow: 0 0 8px #4ade80;
 }
 
-.showcaseStage {
+.cardCenter {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 16px 0;
+  text-align: center;
+  padding: 24px 16px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 14px;
-  position: relative;
-}
-
-.deviceWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 150px;
-  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.6));
-  animation: floatPod 4s ease-in-out infinite;
-}
-
-@keyframes floatPod {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-
-.specsGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  border-radius: 16px;
   position: relative;
   z-index: 2;
 }
 
-.specBox {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
-  padding: 10px 12px;
+.logoStage {
+  background: #ffffff;
+  padding: 12px 28px;
+  border-radius: 12px;
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  margin-bottom: 16px;
 }
 
-.specVal {
-  font-size: 14px;
+.centerLogo {
+  width: 140px;
+  height: 38px;
+  object-fit: contain;
+  display: block;
+}
+
+.cardSlogan {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #a1a1aa;
+  max-width: 280px;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+.statBox {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  text-align: center;
+}
+
+.statNumber {
+  font-size: 16px;
   font-weight: 800;
   color: #ffffff;
   letter-spacing: -0.01em;
 }
 
-.specLabel {
-  font-size: 11px;
-  color: #a1a1aa;
+.statLabel {
+  font-size: 10px;
+  color: #71717a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
 }
 
-.cardBottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 14px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+.cardFooter {
   position: relative;
   z-index: 2;
 }
 
-.priceLabel {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #71717a;
-}
-
-.cardPrice {
-  font-size: 20px;
-  font-weight: 800;
-  color: #ffffff;
+.cardBtn {
   display: block;
-}
-
-.orderBtn {
+  width: 100%;
+  text-align: center;
   background: #ffffff;
   color: #09090b;
   font-size: 13px;
   font-weight: 700;
-  padding: 9px 18px;
-  border-radius: 8px;
-  transition: all 0.15s ease;
+  padding: 12px;
+  border-radius: 10px;
   text-decoration: none;
+  transition: all 0.15s ease;
 }
 
-.orderBtn:hover {
+.cardBtn:hover {
   background: #e4e4e7;
   transform: translateY(-1px);
 }
 
+/* Responsive */
 @media (max-width: 1024px) {
   .grid {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 40px;
   }
-  .heroVisual {
+  .brandCard {
     max-width: 100%;
   }
 }
 
 @media (max-width: 640px) {
   .hero {
-    padding-top: calc(var(--header-height) + 20px);
-    padding-bottom: 40px;
+    padding-top: calc(var(--header-height, 60px) + 24px);
+    padding-bottom: 48px;
   }
-  .infoRow {
+  .ctaGroup {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 14px;
-  }
-  .infoDivider {
-    display: none;
-  }
-  .cta {
     width: 100%;
   }
-  .ctaPrimary, .ctaOutline {
-    flex: 1;
-    text-align: center;
-    padding: 12px 16px;
+  .btnPrimary, .btnSecondary {
+    width: 100%;
+    justify-content: center;
+  }
+  .trustRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .trustDivider {
+    display: none;
   }
 }
