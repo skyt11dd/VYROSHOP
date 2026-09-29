@@ -10,10 +10,10 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@prisma/client": "latest"
+    "@prisma/client": "*"
   },
   "devDependencies": {
-    "prisma": "latest",
-    "typescript": "latest"
+    "prisma": "*",
+    "typescript": "*"
   }
 }

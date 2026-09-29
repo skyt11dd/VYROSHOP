@@ -8,14 +8,14 @@
     "start": "node dist/main.js"
   },
   "dependencies": {
-    "telegraf": "latest",
-    "dotenv": "latest",
+    "telegraf": "*",
+    "dotenv": "*",
     "@vyro/database": "*",
     "@vyro/types": "*"
   },
   "devDependencies": {
-    "typescript": "latest",
-    "tsx": "latest",
-    "@types/node": "latest"
+    "typescript": "*",
+    "tsx": "*",
+    "@types/node": "*"
   }
 }

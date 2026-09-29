@@ -9,21 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "lucide-react": "latest",
+    "next": "*",
+    "react": "*",
+    "react-dom": "*",
+    "lucide-react": "*",
     "@vyro/ui": "*",
     "@vyro/types": "*"
   },
   "devDependencies": {
-    "typescript": "latest",
-    "@types/node": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "postcss": "latest",
-    "tailwindcss": "latest",
-    "eslint": "latest",
-    "eslint-config-next": "latest"
+    "typescript": "*",
+    "@types/node": "*",
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "postcss": "*",
+    "tailwindcss": "*",
+    "eslint": "*",
+    "eslint-config-next": "*"
   }
 }

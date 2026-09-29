@@ -9,22 +9,22 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "fastify": "latest",
-    "@fastify/cors": "latest",
-    "@fastify/jwt": "latest",
-    "@fastify/websocket": "latest",
-    "bcryptjs": "latest",
-    "slugify": "latest",
-    "dotenv": "latest",
+    "fastify": "*",
+    "@fastify/cors": "*",
+    "@fastify/jwt": "*",
+    "@fastify/websocket": "*",
+    "bcryptjs": "*",
+    "slugify": "*",
+    "dotenv": "*",
     "@vyro/database": "*",
     "@vyro/types": "*",
     "@vyro/validation": "*",
-    "telegraf": "latest"
+    "telegraf": "*"
   },
   "devDependencies": {
-    "typescript": "latest",
-    "tsx": "latest",
-    "@types/node": "latest",
-    "@types/bcryptjs": "latest"
+    "typescript": "*",
+    "tsx": "*",
+    "@types/node": "*",
+    "@types/bcryptjs": "*"
   }
 }
