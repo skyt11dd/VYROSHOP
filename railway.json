@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1",
+  "template": {
+    "name": "VYRO E-Commerce Platform",
+    "description": "Full-stack e-commerce system with API, Telegram Bot, and PostgreSQL.",
+    "prerequisites": [
+      {
+        "id": "postgres",
+        "name": "PostgreSQL Database",
+        "image": "postgres:15"
+      }
+    ],
+    "services": [
+      {
+        "name": "VYRO API",
+        "source": {
+          "repo": "skyt11dd/VYROSHOP",
+          "branch": "main"
+        },
+        "build": {
+          "builder": "NIXPACKS",
+          "buildCommand": "npm install && npx prisma generate --schema=packages/database/prisma/schema.prisma && npx turbo run build --filter=api..."
+        },
+        "deploy": {
+          "startCommand": "node apps/api/dist/main.js"
+        },
+        "env": {
+          "PORT": "4000",
+          "DATABASE_URL": "${{ postgres.DATABASE_URL }}",
+          "JWT_SECRET": "generate_a_strong_secret_key_here"
+        }
+      },
+      {
+        "name": "VYRO Telegram Bot",
+        "source": {
+          "repo": "skyt11dd/VYROSHOP",
+          "branch": "main"
+        },
+        "build": {
+          "builder": "NIXPACKS",
+          "buildCommand": "npm install && npx prisma generate --schema=packages/database/prisma/schema.prisma && npx turbo run build --filter=telegram-bot..."
+        },
+        "deploy": {
+          "startCommand": "node apps/telegram-bot/dist/main.js"
+        },
+        "env": {
+          "DATABASE_URL": "${{ postgres.DATABASE_URL }}",
+          "TELEGRAM_BOT_TOKEN": "YOUR_TELEGRAM_BOT_TOKEN_HERE",
+          "MINI_APP_URL": "https://mini.vyro.store",
+          "CRM_URL": "https://crm.vyro.store"
+        }
+      }
+    ]
+  }
+}
