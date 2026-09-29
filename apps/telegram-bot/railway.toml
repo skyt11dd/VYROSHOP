@@ -1,0 +1,6 @@
+[build]
+builder = "NIXPACKS"
+buildCommand = "npm install && npx prisma generate --schema=packages/database/prisma/schema.prisma && npx turbo run build --filter=telegram-bot..."
+
+[deploy]
+startCommand = "node apps/telegram-bot/dist/main.js"

@@ -1,0 +1,6 @@
+[build]
+builder = "NIXPACKS"
+buildCommand = "npm install && npx prisma generate --schema=packages/database/prisma/schema.prisma && npx turbo run build --filter=website..."
+
+[deploy]
+startCommand = "npx turbo run start --filter=website"
