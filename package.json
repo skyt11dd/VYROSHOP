@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "postinstall": "prisma generate --schema=packages/database/prisma/schema.prisma",
-    "start": "yarn workspace api start",
+    "start": "node scripts/start.js",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
