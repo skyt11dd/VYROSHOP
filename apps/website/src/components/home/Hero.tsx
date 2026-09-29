@@ -44,18 +44,6 @@ export function Hero() {
       <div className={styles.heroInner}>
         {/* Left — Main Banner */}
         <div className={styles.mainBanner}>
-          <div className={styles.bannerBg}>
-            <Image
-              src="/images/hero-banner.jpg"
-              alt="VYRO Vape"
-              fill
-              priority
-              quality={85}
-              className={styles.bannerImg}
-            />
-            <div className={styles.bannerOverlay} />
-          </div>
-
           <div className={styles.bannerContent}>
             <div className={styles.badges}>
               <span className={styles.badge18}>18+</span>
