@@ -4,6 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useCart } from '@/contexts/CartContext';
 import { ProductCard } from '@/components/product/ProductCard';
+import { ProductIllustration } from '@/components/product/ProductIllustration';
+import { formatPrice } from '@/lib/format';
 import styles from './ProductPage.module.css';
 
 export function ProductPageClient({ product, related }: { product: any; related: any[] }) {
@@ -46,10 +48,12 @@ export function ProductPageClient({ product, related }: { product: any; related:
           {/* Gallery */}
           <div className={styles.gallery}>
             <div className={styles.mainImage}>
-              {product.images?.[activeImage] ? (
+              {product.images?.[activeImage]?.url && !product.images[activeImage].url.includes('/images/') ? (
                 <Image src={product.images[activeImage].url} alt={product.name} fill style={{ objectFit: 'contain' }} />
               ) : (
-                <div className={styles.noImg}>Немає фото</div>
+                <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fafafa' }}>
+                  <ProductIllustration category={product.category?.name} name={product.name} />
+                </div>
               )}
               {discount && <span className={`badge badge-accent ${styles.discount}`}>-{discount}%</span>}
             </div>
@@ -75,8 +79,8 @@ export function ProductPageClient({ product, related }: { product: any; related:
             {product.brand && <p className={styles.brand}>{product.brand.name}</p>}
 
             <div className={styles.pricing}>
-              <span className={styles.price}>{product.price.toLocaleString()} ₴</span>
-              {product.oldPrice && <span className={styles.oldPrice}>{product.oldPrice.toLocaleString()} ₴</span>}
+              <span className={styles.price}>{formatPrice(product.price)} ₴</span>
+              {product.oldPrice && <span className={styles.oldPrice}>{formatPrice(product.oldPrice)} ₴</span>}
             </div>
 
             <p className={styles.shortDesc}>{product.shortDescription}</p>

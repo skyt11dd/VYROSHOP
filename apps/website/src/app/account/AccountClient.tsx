@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { api } from '@/lib/api';
+import { formatPrice } from '@/lib/format';
 import styles from './AccountPage.module.css';
 
 type Tab = 'profile' | 'orders' | 'favorites' | 'login';
@@ -165,7 +166,7 @@ export default function AccountClient() {
                         <span className={`badge ${styles.statusBadge}`}>{o.status}</span>
                       </div>
                       <p style={{ color: 'var(--text-secondary)', fontSize: 13 }}>{new Date(o.createdAt).toLocaleDateString('uk-UA')}</p>
-                      <div className={styles.orderTotal}>Сума: <strong>{o.totalAmount.toLocaleString()} ₴</strong></div>
+                      <div className={styles.orderTotal}>Сума: <strong>{formatPrice(o.totalAmount)} ₴</strong></div>
                     </div>
                   ))
                 )}

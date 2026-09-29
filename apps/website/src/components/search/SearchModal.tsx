@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { api } from '@/lib/api';
+import { formatPrice } from '@/lib/format';
 import styles from './SearchModal.module.css';
 
 interface SearchModalProps {
@@ -10,7 +11,7 @@ interface SearchModalProps {
   onClose: () => void;
 }
 
-const popularQueries = ['Навушники', 'Смартфон', 'Ноутбук', 'Клавіатура', 'Монітор'];
+const popularQueries = ['Vaporesso', 'Oxva', 'Сольові рідини', 'Elf Bar', 'Картриджі'];
 
 export function SearchModal({ open, onClose }: SearchModalProps) {
   const [query, setQuery] = useState('');
@@ -137,7 +138,7 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
                     <span className={styles.name}>{p.name}</span>
                     <span className={styles.cat}>{p.category?.name}</span>
                   </div>
-                  <span className={styles.price}>{p.price.toLocaleString()} ₴</span>
+                  <span className={styles.price}>{formatPrice(p.price)} ₴</span>
                 </Link>
               ))}
               <Link

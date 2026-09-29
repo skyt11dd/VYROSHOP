@@ -1,9 +1,10 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/contexts/CartContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { api } from '@/lib/api';
+import { formatPrice } from '@/lib/format';
 import styles from './CheckoutPage.module.css';
 
 export default function CheckoutPage() {
@@ -62,8 +63,13 @@ export default function CheckoutPage() {
     );
   }
 
+  useEffect(() => {
+    if (!items.length) {
+      router.push('/cart');
+    }
+  }, [items.length, router]);
+
   if (!items.length) {
-    router.push('/cart');
     return null;
   }
 
@@ -110,13 +116,13 @@ export default function CheckoutPage() {
               {items.map(item => (
                 <div key={item.productId} className={styles.orderItem}>
                   <span>{item.name} × {item.quantity}</span>
-                  <span>{(item.price * item.quantity).toLocaleString()} ₴</span>
+                  <span>{formatPrice(item.price * item.quantity)} ₴</span>
                 </div>
               ))}
             </div>
             <div className={styles.orderTotal}>
               <span>Загальна сума</span>
-              <span>{total.toLocaleString()} ₴</span>
+              <span>{formatPrice(total)} ₴</span>
             </div>
           </div>
         </div>

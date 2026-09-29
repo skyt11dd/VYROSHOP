@@ -1,6 +1,7 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useCart } from '@/contexts/CartContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { SearchModal } from '@/components/search/SearchModal';
@@ -8,10 +9,11 @@ import { MobileMenu } from '@/components/layout/MobileMenu';
 import styles from './Header.module.css';
 
 const navLinks = [
-  { href: '/shop', label: 'Магазин' },
-  { href: '/shop?sort=newest', label: 'Новинки' },
-  { href: '/shop?popular=true', label: 'Популярне' },
-  { href: '/about', label: 'Про нас' },
+  { href: '/shop', label: 'Каталог' },
+  { href: '/shop?category=pods', label: 'POD-системи' },
+  { href: '/shop?category=liquids', label: 'Рідини' },
+  { href: '/shop?category=disposables', label: 'Одноразки' },
+  { href: '/shop?category=cartridges', label: 'Картриджі' },
 ];
 
 export function Header() {
@@ -38,8 +40,22 @@ export function Header() {
             </svg>
           </button>
 
-          {/* Logo */}
-          <Link href="/" className={styles.logo}>VYRO</Link>
+          {/* Logo with VYRO Pod device */}
+          <Link href="/" className={styles.logoLink} aria-label="Головна VYRO Vape">
+            <div className={styles.logoWrapper}>
+              <Image
+                src="/logo.png"
+                alt="VYRO Vape Shop"
+                width={116}
+                height={32}
+                priority
+                unoptimized
+                className={styles.logoImg}
+              />
+            </div>
+          </Link>
+
+          <span className={styles.ageBadge}>18+</span>
 
           {/* Desktop nav */}
           <nav className={styles.nav}>

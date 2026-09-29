@@ -1,16 +1,53 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './Footer.module.css';
 
 export function Footer() {
   return (
     <footer className={styles.footer}>
       <div className="container">
+        {/* 18+ Warning Bar */}
+        <div style={{
+          borderBottom: '1px solid var(--border)',
+          paddingBottom: '20px',
+          marginBottom: '32px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+          color: '#52525b',
+          fontSize: '12px',
+          lineHeight: '1.5',
+        }}>
+          <span style={{
+            background: '#f4f4f5',
+            border: '1px solid #e4e4e7',
+            padding: '2px 6px',
+            borderRadius: '4px',
+            fontWeight: 700,
+            fontSize: '11px',
+            color: '#09090b',
+            flexShrink: 0,
+          }}>18+</span>
+          <span>УВАГА: Вейп-продукція та сольові рідини містять нікотин, який викликає залежність. Продаж здійснюється виключно особам, які досягли 18 років.</span>
+        </div>
+
         <div className={styles.grid}>
           <div className={styles.brand}>
-            <Link href="/" className={styles.logo}>VYRO</Link>
-            <p className={styles.tagline}>Сучасний інтернет-магазин. Обирай. Порівнюй. Замовляй.</p>
+            <Link href="/" className={styles.logo}>
+              <Image
+                src="/logo.png"
+                alt="VYRO"
+                width={120}
+                height={33}
+                unoptimized
+                style={{ width: '120px', height: '33px', objectFit: 'contain' }}
+              />
+            </Link>
+            <p className={styles.tagline}>
+              Преміальний вейп-шоп. Тільки оригінальні POD-системи, топові сольові рідини та фірмові розхідники.
+            </p>
             <div className={styles.socials}>
-              <a href="#" aria-label="Telegram" className={styles.social}>
+              <a href="https://t.me" target="_blank" rel="noopener noreferrer" aria-label="Telegram" className={styles.social}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/>
                 </svg>
@@ -24,33 +61,28 @@ export function Footer() {
           </div>
 
           <div className={styles.col}>
-            <h4>Магазин</h4>
+            <h4>Каталог</h4>
             <Link href="/shop">Всі товари</Link>
-            <Link href="/shop?isNew=true">Новинки</Link>
-            <Link href="/shop?popular=true">Популярне</Link>
-            <Link href="/shop?featured=true">Рекомендовані</Link>
+            <Link href="/shop?category=pods">POD-системи</Link>
+            <Link href="/shop?category=liquids">Сольові рідини</Link>
+            <Link href="/shop?category=disposables">Одноразки</Link>
+            <Link href="/shop?category=cartridges">Картриджі</Link>
           </div>
 
           <div className={styles.col}>
-            <h4>Компанія</h4>
-            <Link href="/about">Про нас</Link>
+            <h4>Покупцям</h4>
+            <Link href="/about">Про VYRO</Link>
             <Link href="/contact">Контакти</Link>
-            <Link href="/faq">FAQ</Link>
-          </div>
-
-          <div className={styles.col}>
-            <h4>Підтримка</h4>
-            <Link href="/faq">Часті питання</Link>
-            <Link href="/contact">Зв'язатись</Link>
+            <Link href="/faq">Питання та відповіді</Link>
             <Link href="/account/orders">Статус замовлення</Link>
           </div>
         </div>
 
         <div className={styles.bottom}>
-          <p>&copy; {new Date().getFullYear()} VYRO. Всі права захищені.</p>
+          <p>&copy; {new Date().getFullYear()} VYRO Vape Shop. Всі права захищені.</p>
           <div className={styles.legal}>
             <a href="#">Політика конфіденційності</a>
-            <a href="#">Умови використання</a>
+            <a href="#">Умови продажу 18+</a>
           </div>
         </div>
       </div>

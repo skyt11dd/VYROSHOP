@@ -3,6 +3,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '@/contexts/CartContext';
+import { ProductIllustration } from './ProductIllustration';
+import { formatPrice } from '@/lib/format';
 import styles from './ProductCard.module.css';
 
 interface ProductCardProps {
@@ -47,17 +49,17 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <Link href={`/product/${product.slug}`} className={styles.card} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
       <div className={styles.imageWrap}>
-        {mainImage ? (
+        {mainImage && !mainImage.includes('/images/cat-') && !mainImage.includes('/images/hero-') ? (
           <Image
-            src={hovered && secondImage ? secondImage : mainImage}
+            src={hovered && secondImage && !secondImage.includes('/images/') ? secondImage : mainImage}
             alt={product.name}
             fill
-            style={{ objectFit: 'cover', transition: 'all 0.4s ease' }}
+            style={{ objectFit: 'contain', padding: '16px' }}
             sizes="(max-width: 768px) 50vw, 25vw"
           />
         ) : (
-          <div className={styles.noImage}>
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><path d="M3 17l5-5 4 4 3-3 6 6" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/></svg>
+          <div className={styles.illustrationWrap}>
+            <ProductIllustration category={product.category?.name} name={product.name} />
           </div>
         )}
         <div className={styles.badges}>
@@ -80,8 +82,8 @@ export function ProductCard({ product }: ProductCardProps) {
         <h3 className={styles.name}>{product.name}</h3>
         {product.shortDescription && <p className={styles.desc}>{product.shortDescription}</p>}
         <div className={styles.pricing}>
-          <span className={styles.price}>{product.price.toLocaleString()} ₴</span>
-          {product.oldPrice && <span className={styles.oldPrice}>{product.oldPrice.toLocaleString()} ₴</span>}
+          <span className={styles.price}>{formatPrice(product.price)} ₴</span>
+          {product.oldPrice && <span className={styles.oldPrice}>{formatPrice(product.oldPrice)} ₴</span>}
         </div>
       </div>
     </Link>

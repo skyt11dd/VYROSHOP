@@ -3,32 +3,38 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { AgeGate } from '@/components/layout/AgeGate';
 import { CartProvider } from '@/contexts/CartContext';
 import { AuthProvider } from '@/contexts/AuthContext';
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'] });
 
 export const metadata: Metadata = {
-  title: { default: 'VYRO — Сучасний інтернет-магазин', template: '%s | VYRO' },
-  description: 'VYRO — преміальний інтернет-магазин. Обирай, порівнюй, замовляй. Широкий каталог товарів з доставкою по Україні.',
-  keywords: 'VYRO, інтернет-магазин, купити, доставка, Україна',
+  title: { default: 'VYRO — Вейп Шоп | POD-системи, Рідини, Одноразки', template: '%s | VYRO' },
+  description: 'VYRO — офіційний вейп шоп. Преміальні POD-системи, сольові рідини, одноразки та картриджі з швидкою доставкою по Україні. 18+',
+  keywords: 'VYRO, вейп шоп, pod-системи, сольові рідини, одноразки, картриджі, vape, купити pod',
   openGraph: {
-    siteName: 'VYRO',
+    siteName: 'VYRO Vape Shop',
     type: 'website',
     locale: 'uk_UA',
+  },
+  icons: {
+    icon: '/icon.png',
+    apple: '/icon.png',
   },
   robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="uk" suppressHydrationWarning>
+    <html lang="uk" data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className={inter.className}>
         <AuthProvider>
           <CartProvider>
             <Header />
             <main>{children}</main>
             <Footer />
+            <AgeGate />
           </CartProvider>
         </AuthProvider>
       </body>
