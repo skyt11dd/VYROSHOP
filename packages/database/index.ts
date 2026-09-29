@@ -1,7 +1,9 @@
+// @ts-ignore
 import { PrismaClient } from '@prisma/client';
 
 declare const process: any;
 
+// @ts-ignore
 export * from '@prisma/client';
 
 const globalForPrisma = globalThis as unknown as {
