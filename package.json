@@ -1,7 +1,7 @@
 {
   "name": "vyro",
   "version": "1.0.0",
-  "packageManager": "npm@10.8.1",
+  "packageManager": "yarn@1.22.19",
   "private": true,
   "workspaces": [
     "apps/*",
@@ -16,7 +16,7 @@
     "db:generate": "npm run db:generate --workspace=@vyro/database"
   },
   "devDependencies": {
-    "turbo": "latest",
-    "typescript": "latest"
+    "turbo": "*",
+    "typescript": "*"
   }
 }
