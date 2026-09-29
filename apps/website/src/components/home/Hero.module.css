@@ -26,7 +26,8 @@
   overflow: hidden;
   display: flex;
   align-items: center;
-  background: #09090b;
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  border: 1px solid #f0f0f2;
   min-height: 520px;
 }
 
@@ -37,48 +38,22 @@
   width: 100%;
 }
 
-/* Badges */
-.badges {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
-}
 
-.badge18 {
-  font-size: 12px;
-  font-weight: 700;
-  color: #000000;
-  background: #ffffff;
-  padding: 4px 10px;
-  border-radius: 100px;
-}
-
-.badgeOfficial {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: #a1a1aa;
-  background: #27272a;
-  padding: 4px 12px;
-  border-radius: 100px;
-}
 
 /* Headline */
 .headline {
-  font-size: clamp(36px, 4.5vw, 56px);
+  font-size: clamp(40px, 5vw, 64px);
   font-weight: 800;
   line-height: 1.05;
-  letter-spacing: -0.03em;
-  color: #ffffff;
+  letter-spacing: -0.04em;
+  color: #09090b;
   margin-bottom: 16px;
 }
 
 .tagline {
   font-size: 16px;
   line-height: 1.5;
-  color: #a1a1aa;
+  color: #71717a;
   max-width: 440px;
   margin-bottom: 32px;
 }
@@ -96,8 +71,8 @@
   align-items: center;
   gap: 8px;
   padding: 14px 28px;
-  background: #ffffff;
-  color: #000000;
+  background: #09090b;
+  color: #ffffff;
   font-size: 15px;
   font-weight: 600;
   border-radius: 100px;
@@ -107,56 +82,7 @@
 
 .btnShop:hover {
   transform: scale(1.02);
-  background: #f4f4f5;
-}
-
-.btnTg {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 28px;
   background: #27272a;
-  color: #ffffff;
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: 100px;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.btnTg:hover {
-  background: #3f3f46;
-}
-
-/* Trust Bar */
-.trustBar {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding-top: 24px;
-  border-top: 1px solid #27272a;
-  flex-wrap: wrap;
-}
-
-.trustItem {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  color: #a1a1aa;
-}
-
-.trustIcon {
-  font-size: 14px;
-}
-
-.trustDot {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: #3f3f46;
-  flex-shrink: 0;
 }
 
 /* ── Category Grid (Right) ──────────────── */
@@ -312,19 +238,10 @@
     gap: 8px;
     margin-bottom: 18px;
   }
-  .btnShop,
-  .btnTg {
+  .btnShop {
     width: 100%;
     justify-content: center;
     text-align: center;
-  }
-  .trustBar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-  .trustDot {
-    display: none;
   }
   .catGrid {
     grid-template-columns: 1fr 1fr;
