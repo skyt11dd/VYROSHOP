@@ -36,7 +36,7 @@ function ShopContent() {
       shortDescription: '1000 mAh, регулювання затяжки, 3 режими потужності, швидка зарядка',
       stock: 12,
       isNew: true,
-      images: [],
+      images: [{ url: '/images/xros4.jpg' }],
       category: { name: 'POD-системи' },
     },
     {
@@ -47,7 +47,7 @@ function ShopContent() {
       oldPrice: 360,
       shortDescription: 'Преміальна сольова рідина, ягідні та холодні мікси',
       stock: 54,
-      images: [],
+      images: [{ url: '/images/chaser-salt.jpg' }],
       category: { name: 'Сольові рідини' },
     },
     {
@@ -59,7 +59,7 @@ function ShopContent() {
       shortDescription: '1300 mAh, кольоровий HD дисплей 0.56", потужність до 30W',
       stock: 9,
       isNew: true,
-      images: [],
+      images: [{ url: '/images/xlim-pro.jpg' }],
       category: { name: 'POD-системи' },
     },
     {
@@ -70,7 +70,7 @@ function ShopContent() {
       oldPrice: 790,
       shortDescription: '23 000 затяжок, цифровий екран, регулювання потужності',
       stock: 22,
-      images: [],
+      images: [{ url: '/images/elfbar-disposable.jpg' }],
       category: { name: 'Одноразки' },
     },
     {
@@ -81,7 +81,7 @@ function ShopContent() {
       oldPrice: 1390,
       shortDescription: '0.96" TFT екран, 30W, плавне регулювання тяги',
       stock: 14,
-      images: [],
+      images: [{ url: '/images/ursa-nano.jpg' }],
       category: { name: 'POD-системи' },
     },
     {
@@ -92,7 +92,7 @@ function ShopContent() {
       oldPrice: 520,
       shortDescription: 'Оригінальні картриджі Corex 2.0 із захистом від протікань',
       stock: 40,
-      images: [],
+      images: [{ url: '/images/cartridge-pack.jpg' }],
       category: { name: 'Картриджі' },
     },
     {
@@ -103,7 +103,7 @@ function ShopContent() {
       oldPrice: 380,
       shortDescription: 'Міцний сольовий нікотин, екстра-холод та яскраві моно-смаки',
       stock: 35,
-      images: [],
+      images: [{ url: '/images/octobar-salt.jpg' }],
       category: { name: 'Сольові рідини' },
     },
     {
@@ -115,7 +115,7 @@ function ShopContent() {
       shortDescription: '1000 mAh, 30W, стильний металевий корпус',
       stock: 11,
       isNew: true,
-      images: [],
+      images: [{ url: '/images/ursa-nano.jpg' }],
       category: { name: 'POD-системи' },
     },
   ];

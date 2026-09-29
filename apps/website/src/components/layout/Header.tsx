@@ -6,21 +6,24 @@ import { useCart } from '@/contexts/CartContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { SearchModal } from '@/components/search/SearchModal';
 import { MobileMenu } from '@/components/layout/MobileMenu';
+import { formatPrice } from '@/lib/format';
 import styles from './Header.module.css';
 
-const navLinks = [
-  { href: '/shop', label: 'Каталог' },
+const categoriesNav = [
+  { href: '/shop', label: '🔥 Всі товари' },
   { href: '/shop?category=pods', label: 'POD-системи' },
-  { href: '/shop?category=liquids', label: 'Рідини' },
+  { href: '/shop?category=liquids', label: 'Сольові рідини' },
   { href: '/shop?category=disposables', label: 'Одноразки' },
-  { href: '/shop?category=cartridges', label: 'Картриджі' },
+  { href: '/shop?category=cartridges', label: 'Картриджі та випарники' },
+  { href: '/shop?popular=true', label: 'Топ продажів' },
+  { href: '/shop?isNew=true', label: 'Новинки' },
 ];
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { count } = useCart();
+  const { count, total } = useCart();
   const { customer } = useAuth();
 
   useEffect(() => {
@@ -32,71 +35,137 @@ export function Header() {
   return (
     <>
       <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
-        <div className={`container ${styles.inner}`}>
-          {/* Mobile menu toggle */}
-          <button className={`${styles.menuBtn} btn btn-ghost btn-icon`} onClick={() => setMobileOpen(true)} aria-label="Меню">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M2 5h16M2 10h16M2 15h16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-            </svg>
-          </button>
-
-          {/* Logo with VYRO Pod device */}
-          <Link href="/" className={styles.logoLink} aria-label="Головна VYRO Vape">
-            <div className={styles.logoWrapper}>
-              <Image
-                src="/logo.png"
-                alt="VYRO Vape Shop"
-                width={116}
-                height={32}
-                priority
-                unoptimized
-                className={styles.logoImg}
-              />
+        {/* Top Announcement Bar */}
+        <div className={styles.topBar}>
+          <div className={`container ${styles.topBarInner}`}>
+            <div className={styles.topBarLeft}>
+              <span className={styles.topNotice}>
+                🚚 Безкоштовна доставка від <strong>1 000 ₴</strong>
+              </span>
+              <span className={styles.dot}>•</span>
+              <span className={styles.topNotice}>
+                📦 Відправка Новою Поштою щодня до 18:00
+              </span>
+              <span className={styles.dot}>•</span>
+              <span className={styles.topNotice}>
+                🔞 18+ Тільки оригінал
+              </span>
             </div>
-          </Link>
 
-          <span className={styles.ageBadge}>18+</span>
+            <div className={styles.topBarRight}>
+              <a
+                href="https://t.me/vyro_store"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.tgLink}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                </svg>
+                <span>Консультація в Telegram</span>
+              </a>
+              <span className={styles.workHours}>Пн–Нд: 10:00–21:00</span>
+            </div>
+          </div>
+        </div>
 
-          {/* Desktop nav */}
-          <nav className={styles.nav}>
-            {navLinks.map(l => (
-              <Link key={l.href} href={l.href} className={styles.navLink}>{l.label}</Link>
-            ))}
-          </nav>
-
-          {/* Actions */}
-          <div className={styles.actions}>
-            <button className="btn btn-ghost btn-icon" onClick={() => setSearchOpen(true)} aria-label="Пошук">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.5"/>
-                <path d="M12.5 12.5L16 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        {/* Main Header Bar */}
+        <div className={styles.mainBar}>
+          <div className={`container ${styles.mainBarInner}`}>
+            {/* Mobile menu button */}
+            <button
+              className={styles.menuBtn}
+              onClick={() => setMobileOpen(true)}
+              aria-label="Меню магазину"
+            >
+              <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
+                <path d="M2 5h16M2 10h16M2 15h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
               </svg>
             </button>
-            <Link href="/favorites" className="btn btn-ghost btn-icon" aria-label="Обране">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M9 15.5S2 11 2 6.5a4 4 0 0 1 7-2.6A4 4 0 0 1 16 6.5C16 11 9 15.5 9 15.5z" stroke="currentColor" strokeWidth="1.5"/>
-              </svg>
+
+            {/* Official VYRO Logo */}
+            <Link href="/" className={styles.logoLink} aria-label="Головна сторінка VYRO">
+              <div className={styles.logoWrapper}>
+                <Image
+                  src="/logo.png"
+                  alt="VYRO Vape Shop"
+                  width={124}
+                  height={34}
+                  priority
+                  unoptimized
+                  className={styles.logoImg}
+                />
+              </div>
+              <span className={styles.ageBadge}>18+</span>
             </Link>
-            <Link href="/cart" className={`btn btn-ghost btn-icon ${styles.cartBtn}`} aria-label="Кошик">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M2 2h2l2.5 9h7l2-6H5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <circle cx="8" cy="14.5" r="1" fill="currentColor"/>
-                <circle cx="13" cy="14.5" r="1" fill="currentColor"/>
+
+            {/* Prominent Search Bar */}
+            <div className={styles.searchBar} onClick={() => setSearchOpen(true)}>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className={styles.searchIcon}>
+                <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.6"/>
+                <path d="M12.5 12.5L16 16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
               </svg>
-              {count > 0 && <span className={styles.badge}>{count > 99 ? '99+' : count}</span>}
-            </Link>
-            <Link href="/account" className="btn btn-ghost btn-icon" aria-label="Акаунт">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <circle cx="9" cy="6" r="3.5" stroke="currentColor" strokeWidth="1.5"/>
-                <path d="M2 16c0-3.3 3.1-6 7-6s7 2.7 7 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-              </svg>
-            </Link>
+              <span className={styles.searchPlaceholder}>
+                Пошук: Vaporesso, OXVA, Chaser, сольові рідини, картриджі...
+              </span>
+              <kbd className={styles.searchKbd}>Ctrl+K</kbd>
+            </div>
+
+            {/* User Actions */}
+            <div className={styles.actions}>
+              <Link href="/favorites" className={styles.actionBtn} aria-label="Обрані товари">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+                <span className={styles.actionLabel}>Обране</span>
+              </Link>
+
+              <Link href="/cart" className={`${styles.actionBtn} ${styles.cartActionBtn}`} aria-label="Кошик">
+                <div className={styles.cartIconWrapper}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                  </svg>
+                  {count > 0 && <span className={styles.cartCount}>{count > 99 ? '99+' : count}</span>}
+                </div>
+                <div className={styles.cartTextWrap}>
+                  <span className={styles.cartTitle}>Кошик</span>
+                  <span className={styles.cartTotal}>{total > 0 ? `${formatPrice(total)} ₴` : '0 ₴'}</span>
+                </div>
+              </Link>
+
+              <Link href="/account" className={styles.actionBtn} aria-label="Особистий кабінет">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+                <span className={styles.actionLabel}>{customer ? 'Кабінет' : 'Вхід'}</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Category Navigation Bar (Subnav) */}
+        <div className={styles.subnavBar}>
+          <div className={`container ${styles.subnavInner}`}>
+            <nav className={styles.categoriesNav}>
+              {categoriesNav.map((cat) => (
+                <Link key={cat.href} href={cat.href} className={styles.catLink}>
+                  {cat.label}
+                </Link>
+              ))}
+            </nav>
           </div>
         </div>
       </header>
 
       <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
-      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} navLinks={navLinks} />
+      <MobileMenu
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        navLinks={categoriesNav}
+      />
     </>
   );
 }
