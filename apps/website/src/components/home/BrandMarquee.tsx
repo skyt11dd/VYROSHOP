@@ -20,11 +20,13 @@ export function BrandMarquee() {
         <div className={styles.wrapper}>
           <span className={styles.title}>Трендові бренди:</span>
           <div className={styles.track}>
-            {brands.map((brand, i) => (
-              <span key={i} className={styles.brandItem}>
-                {brand}
-              </span>
-            ))}
+            <div className={styles.brandList}>
+              {[...brands, ...brands].map((brand, i) => (
+                <span key={i} className={styles.brandItem}>
+                  {brand}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>

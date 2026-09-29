@@ -8,25 +8,26 @@ export function Footer() {
       <div className="container">
         {/* 18+ Warning Bar */}
         <div style={{
-          borderBottom: '1px solid var(--border)',
-          paddingBottom: '20px',
-          marginBottom: '32px',
+          paddingBottom: '40px',
           display: 'flex',
+          flexDirection: 'column',
           alignItems: 'center',
           gap: '12px',
-          color: '#52525b',
-          fontSize: '12px',
-          lineHeight: '1.5',
+          color: '#71717a',
+          fontSize: '13px',
+          lineHeight: '1.6',
+          textAlign: 'center',
+          maxWidth: '600px',
+          margin: '0 auto 40px',
+          borderBottom: '1px solid #f0f0f2'
         }}>
           <span style={{
-            background: '#f4f4f5',
-            border: '1px solid #e4e4e7',
-            padding: '2px 6px',
-            borderRadius: '4px',
+            background: '#09090b',
+            padding: '4px 12px',
+            borderRadius: '100px',
             fontWeight: 700,
-            fontSize: '11px',
-            color: '#09090b',
-            flexShrink: 0,
+            fontSize: '12px',
+            color: '#ffffff',
           }}>18+</span>
           <span>УВАГА: Вейп-продукція та сольові рідини містять нікотин, який викликає залежність. Продаж здійснюється виключно особам, які досягли 18 років.</span>
         </div>

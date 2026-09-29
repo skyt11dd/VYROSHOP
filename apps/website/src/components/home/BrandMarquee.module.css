@@ -1,8 +1,8 @@
 .section {
-  padding: 20px 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  background: #fafafa;
+  padding: 16px 0;
+  border-top: 1px solid #f0f0f2;
+  border-bottom: 1px solid #f0f0f2;
+  background: #ffffff;
 }
 
 .wrapper {
@@ -25,15 +25,20 @@
 .track {
   display: flex;
   align-items: center;
-  gap: 36px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
   width: 100%;
+  overflow: hidden;
 }
 
-.track::-webkit-scrollbar {
-  display: none;
+.brandList {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  animation: scrollMarquee 35s linear infinite;
+}
+
+@keyframes scrollMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .brandItem {
