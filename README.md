@@ -27,3 +27,7 @@ Powered by Turborepo.
 3. Run `npm install`.
 4. Run `npm run db:push` to sync database schema.
 5. Run `npm run dev` to start all apps.
+
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https://github.com/skyt11dd/VYROSHOP)
+
