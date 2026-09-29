@@ -21,12 +21,12 @@
     "@vyro/database": "*",
     "@vyro/types": "*",
     "@vyro/validation": "*",
-    "telegraf": "*"
+    "telegraf": "*",
+    "prisma": "^5.22.0"
   },
   "devDependencies": {
     "typescript": "*",
     "tsx": "*",
-    "@types/node": "*",
-    "prisma": "^5.22.0"
+    "@types/node": "*"
   }
 }
