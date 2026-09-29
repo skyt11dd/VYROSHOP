@@ -1,0 +1,21 @@
+.page {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  background: var(--bg);
+  background-image: radial-gradient(ellipse at 50% 0%, rgba(255,77,0,0.08) 0%, transparent 60%);
+}
+.card {
+  width: 100%; max-width: 420px; margin: 0 20px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+  padding: 48px 40px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.logo { font-size: 22px; font-weight: 900; letter-spacing: -0.04em; color: var(--accent); margin-bottom: 8px; }
+.title { font-size: 26px; font-weight: 800; margin: 0; }
+.sub { color: var(--text-muted); font-size: 13px; margin: 0 0 8px; }
+.error {
+  background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
+  color: var(--error); padding: 10px 14px; border-radius: var(--radius); font-size: 13px;
+}
+.form { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.label { font-size: 12px; font-weight: 600; color: var(--text-secondary); }

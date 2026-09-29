@@ -1,0 +1,12 @@
+{
+  "name": "@vyro/ui",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "dependencies": {
+    "react": "latest",
+    "react-dom": "latest",
+    "tailwindcss": "latest",
+    "clsx": "latest",
+    "tailwind-merge": "latest"
+  }
+}

@@ -1,0 +1,24 @@
+.page { padding-top: calc(var(--header-height) + 40px); padding-bottom: 80px; }
+.authCard { max-width: 480px; margin: 0 auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 40px; }
+.authCard h1 { font-size: 28px; font-weight: 800; margin-bottom: 24px; }
+.error { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: var(--error); padding: 12px 16px; border-radius: var(--radius); font-size: 14px; margin-bottom: 16px; }
+.form { display: flex; flex-direction: column; gap: 16px; margin-bottom: 16px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 32px; }
+.header h1 { font-size: 32px; font-weight: 800; }
+.layout { display: grid; grid-template-columns: 200px 1fr; gap: 32px; align-items: start; }
+.tabs { display: flex; flex-direction: column; gap: 4px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 8px; position: sticky; top: 88px; }
+.tabBtn { padding: 12px 16px; border-radius: var(--radius); font-size: 14px; font-weight: 500; text-align: left; background: none; border: none; cursor: pointer; color: var(--text-secondary); transition: all var(--transition); }
+.tabBtn:hover { background: var(--surface-2); color: var(--text); }
+.tabBtn.active { background: var(--accent-dim); color: var(--accent); font-weight: 600; }
+.content {}
+.section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; }
+.section h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; }
+.profileGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.value { padding: 12px 16px; background: var(--surface-2); border-radius: var(--radius); font-size: 15px; }
+.orderCard { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 10px; }
+.orderHeader { display: flex; align-items: center; justify-content: space-between; font-weight: 600; margin-bottom: 6px; }
+.statusBadge { background: var(--surface-3); color: var(--text-secondary); }
+.orderTotal { font-size: 14px; margin-top: 8px; color: var(--text-secondary); }
+@media (max-width: 768px) { .layout { grid-template-columns: 1fr; } .tabs { position: static; flex-direction: row; overflow-x: auto; } .profileGrid { grid-template-columns: 1fr; } }

@@ -1,0 +1,19 @@
+{
+  "name": "@vyro/database",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "lint": "eslint .",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@prisma/client": "latest"
+  },
+  "devDependencies": {
+    "prisma": "latest",
+    "typescript": "latest"
+  }
+}

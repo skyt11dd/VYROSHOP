@@ -1,0 +1,29 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "src/main.ts",
+  "scripts": {
+    "dev": "tsx watch src/main.ts",
+    "build": "tsc",
+    "start": "node dist/main.js",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "fastify": "latest",
+    "@fastify/cors": "latest",
+    "@fastify/jwt": "latest",
+    "@fastify/websocket": "latest",
+    "bcryptjs": "latest",
+    "slugify": "latest",
+    "dotenv": "latest",
+    "@vyro/database": "*",
+    "@vyro/types": "*",
+    "@vyro/validation": "*"
+  },
+  "devDependencies": {
+    "typescript": "latest",
+    "tsx": "latest",
+    "@types/node": "latest",
+    "@types/bcryptjs": "latest"
+  }
+}

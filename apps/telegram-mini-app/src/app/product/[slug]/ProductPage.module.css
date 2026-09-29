@@ -1,0 +1,27 @@
+.page { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
+.loading { min-height: 100vh; }
+.empty { text-align: center; padding: 100px 20px; color: var(--tg-hint); }
+.gallery { background: var(--tg-surface); }
+.mainImage { position: relative; aspect-ratio: 1; background: rgba(255,255,255,0.02); }
+.noImg { width: 100%; height: 100%; }
+.thumbs { display: flex; gap: 8px; padding: 12px 16px; overflow-x: auto; }
+.thumb { position: relative; width: 60px; height: 60px; flex-shrink: 0; border-radius: var(--radius-sm); overflow: hidden; border: 2px solid transparent; }
+.activeThumb { border-color: var(--accent); }
+.info { padding: 20px 16px; }
+.cat { font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--accent); letter-spacing: 0.08em; }
+.name { font-size: 22px; font-weight: 800; line-height: 1.2; margin: 6px 0 12px; }
+.priceRow { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.price { font-size: 24px; font-weight: 800; color: var(--tg-text); }
+.oldPrice { font-size: 16px; color: var(--tg-hint); text-decoration: line-through; }
+.inStock { font-size: 13px; color: #4ade80; display: block; margin-bottom: 16px; }
+.outStock { font-size: 13px; color: #f87171; display: block; margin-bottom: 16px; }
+.desc { font-size: 15px; color: var(--tg-hint); line-height: 1.6; margin-bottom: 24px; }
+.fullDesc { font-size: 14px; color: var(--tg-text); line-height: 1.6; padding-top: 24px; border-top: 1px solid var(--border); }
+
+.bottomBar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  background: var(--tg-surface);
+  border-top: 1px solid var(--border);
+  z-index: 100;
+}

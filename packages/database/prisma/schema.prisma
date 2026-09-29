@@ -1,0 +1,223 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  role      Role     @default(MANAGER)
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+}
+
+model Customer {
+  id             String   @id @default(uuid())
+  email          String?  @unique
+  telegramId     String?  @unique
+  firstName      String?
+  lastName       String?
+  phone          String?
+  ordersCount    Int      @default(0)
+  totalSpent     Float    @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  lastActivityAt DateTime @default(now())
+
+  orders    Order[]
+  favorites Favorite[]
+  addresses Address[]
+}
+
+model Product {
+  id               String   @id @default(uuid())
+  name             String
+  slug             String   @unique
+  sku              String   @unique
+  description      String
+  shortDescription String
+  price            Float
+  oldPrice         Float?
+  stock            Int      @default(0)
+  active           Boolean  @default(true)
+  featured         Boolean  @default(false)
+  popular          Boolean  @default(false)
+  isNew            Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  brandId String?
+  brand   Brand?  @relation(fields: [brandId], references: [id])
+
+  images    ProductImage[]
+  tags      ProductTag[]
+  orderItems OrderItem[]
+  favorites Favorite[]
+  views     ProductView[]
+}
+
+model Category {
+  id          String   @id @default(uuid())
+  name        String
+  slug        String   @unique
+  description String?
+  image       String?
+  sortOrder   Int      @default(0)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  products Product[]
+}
+
+model Brand {
+  id          String   @id @default(uuid())
+  name        String
+  slug        String   @unique
+  description String?
+  image       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  products Product[]
+}
+
+model ProductImage {
+  id        String   @id @default(uuid())
+  url       String
+  alt       String?
+  sortOrder Int      @default(0)
+  isMain    Boolean  @default(false)
+  
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model ProductTag {
+  id   String @id @default(uuid())
+  name String @unique
+  
+  products Product[]
+}
+
+model Order {
+  id            String      @id @default(uuid())
+  orderNumber   Int         @unique @default(autoincrement())
+  status        OrderStatus @default(NEW)
+  source        OrderSource @default(WEBSITE)
+  totalAmount   Float
+  customerName  String
+  customerPhone String
+  customerCity  String
+  comment       String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  customerId String?
+  customer   Customer? @relation(fields: [customerId], references: [id])
+
+  managerId String?
+  // no strict relation to Manager/User if deleted, maybe just store manager name or ID as string
+
+  items OrderItem[]
+}
+
+enum OrderStatus {
+  NEW
+  PROCESSING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+enum OrderSource {
+  WEBSITE
+  TELEGRAM
+}
+
+model OrderItem {
+  id        String  @id @default(uuid())
+  quantity  Int
+  price     Float
+  
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model Favorite {
+  id         String   @id @default(uuid())
+  createdAt  DateTime @default(now())
+
+  customerId String
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  productId  String
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([customerId, productId])
+}
+
+model Address {
+  id         String   @id @default(uuid())
+  city       String
+  street     String
+  isDefault  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  customerId String
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  title     String
+  message   String
+  type      String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  user      String
+  action    String
+  entity    String
+  entityId  String
+  oldValue  String?
+  newValue  String?
+  ip        String?
+  createdAt DateTime @default(now())
+}
+
+model SearchHistory {
+  id           String   @id @default(uuid())
+  query        String
+  resultsCount Int
+  session      String?
+  createdAt    DateTime @default(now())
+}
+
+model ProductView {
+  id        String   @id @default(uuid())
+  session   String?
+  createdAt DateTime @default(now())
+
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+}

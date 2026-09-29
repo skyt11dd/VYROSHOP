@@ -1,0 +1,14 @@
+.page {}
+.header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.header h1 { font-size: 22px; font-weight: 800; }
+.header p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+.toolbar { display: flex; gap: 12px; margin-bottom: 16px; }
+.tableCard { overflow-x: auto; }
+.productCell { display: flex; align-items: center; gap: 12px; }
+.thumb { position: relative; width: 40px; height: 40px; border-radius: var(--radius-sm); overflow: hidden; background: var(--surface-2); flex-shrink: 0; }
+.noThumb { width: 100%; height: 100%; background: var(--surface-2); }
+.productName { font-size: 13px; font-weight: 600; }
+.catName { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.actions { display: flex; gap: 4px; }
+.pagination { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 20px; }
+.pagination span { font-size: 13px; color: var(--text-secondary); }
