@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { ProductCard } from '@/components/product/ProductCard';
 import { api } from '@/lib/api';
@@ -13,7 +13,7 @@ const SORT_OPTIONS = [
   { value: 'price_desc', label: 'Ціна ↓' },
 ];
 
-export default function ShopPage() {
+function ShopContent() {
   const searchParams = useSearchParams();
   const [products, setProducts] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
@@ -119,5 +119,13 @@ export default function ShopPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ShopPage() {
+  return (
+    <Suspense fallback={<div className="container" style={{ padding: '80px 0' }}><div className="skeleton" style={{ height: 400, borderRadius: 16 }} /></div>}>
+      <ShopContent />
+    </Suspense>
   );
 }
