@@ -106,8 +106,8 @@ body {
 
 /* Telegram Mini App Fullscreen Overrides */
 body.tg-fullscreen header {
-  padding-top: var(--tg-content-safe-area-inset-top, var(--tg-safe-area-inset-top, 44px)) !important;
-  height: calc(var(--header-height) + var(--tg-content-safe-area-inset-top, var(--tg-safe-area-inset-top, 44px))) !important;
+  padding-top: max(44px, var(--tg-content-safe-area-inset-top, var(--tg-safe-area-inset-top, 44px))) !important;
+  height: calc(var(--header-height) + max(44px, var(--tg-content-safe-area-inset-top, var(--tg-safe-area-inset-top, 44px)))) !important;
 }
 
 a {

@@ -66,4 +66,14 @@ export const api = {
     apiFetch<any>(`/api/customer/favorites/${productId}`, {
       method: 'DELETE', headers: { Authorization: `Bearer ${token}` },
     }),
+  updateProfile: (token: string, data: any) =>
+    apiFetch<any>('/api/customer/profile', {
+      method: 'PATCH', body: JSON.stringify(data), headers: { Authorization: `Bearer ${token}` }
+    }),
+  getAddresses: (token: string) =>
+    apiFetch<any>('/api/customer/addresses', { headers: { Authorization: `Bearer ${token}` } }),
+  addAddress: (token: string, data: any) =>
+    apiFetch<any>('/api/customer/addresses', {
+      method: 'POST', body: JSON.stringify(data), headers: { Authorization: `Bearer ${token}` }
+    }),
 };
