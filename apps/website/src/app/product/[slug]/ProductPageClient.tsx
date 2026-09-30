@@ -32,7 +32,7 @@ export function ProductPageClient({ product, related }: { product: any; related:
     <div className={styles.page}>
       {/* Breadcrumb */}
       <div className="container">
-        <nav className={styles.breadcrumb}>
+        <nav className={`${styles.breadcrumb} animate-slide-up delay-75`}>
           <Link href="/">Головна</Link>
           <span>/</span>
           <Link href="/shop">Магазин</Link>
@@ -46,7 +46,7 @@ export function ProductPageClient({ product, related }: { product: any; related:
 
         <div className={styles.grid}>
           {/* Gallery */}
-          <div className={styles.gallery}>
+          <div className={`${styles.gallery} animate-slide-right delay-150`}>
             <div className={styles.mainImage}>
               {product.images?.[activeImage]?.url && !product.images[activeImage].url.includes('/images/') ? (
                 <Image src={product.images[activeImage].url} alt={product.name} fill style={{ objectFit: 'contain' }} />
@@ -73,7 +73,7 @@ export function ProductPageClient({ product, related }: { product: any; related:
           </div>
 
           {/* Info */}
-          <div className={styles.info}>
+          <div className={`${styles.info} animate-slide-up delay-225`}>
             {product.category && <Link href={`/category/${product.category.slug}`} className={styles.catLink}>{product.category.name}</Link>}
             <h1 className={styles.name}>{product.name}</h1>
             {product.brand && <p className={styles.brand}>{product.brand.name}</p>}
@@ -125,14 +125,14 @@ export function ProductPageClient({ product, related }: { product: any; related:
         </div>
 
         {/* Description tabs */}
-        <div className={styles.tabs} style={{ marginTop: 60 }}>
+        <div className={`${styles.tabs} animate-slide-up delay-300`} style={{ marginTop: 60 }}>
           <h2 style={{ fontSize: 22, fontWeight: 700, marginBottom: 20 }}>Опис</h2>
           <div className={styles.description} dangerouslySetInnerHTML={{ __html: product.description }} />
         </div>
 
         {/* Related */}
         {related.length > 0 && (
-          <div style={{ marginTop: 80 }}>
+          <div style={{ marginTop: 80 }} className="animate-slide-up delay-400">
             <div className="section-heading">
               <h2>Схожі товари</h2>
             </div>

@@ -31,7 +31,7 @@ export function Header() {
 
   return (
     <>
-      <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
+      <header className={`${styles.header} ${scrolled ? styles.scrolled : ''} animate-fade-in`}>
         <div className={`container ${styles.inner}`}>
           {/* Mobile menu toggle */}
           <button className={`${styles.menuBtn} btn btn-ghost btn-icon`} onClick={() => setMobileOpen(true)} aria-label="Меню">

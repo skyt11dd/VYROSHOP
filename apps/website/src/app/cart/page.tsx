@@ -12,7 +12,7 @@ export default function CartPage() {
     return (
       <div className={styles.page}>
         <div className="container">
-          <div className={styles.empty}>
+          <div className={`${styles.empty} animate-slide-up delay-75`}>
             <div className={styles.emptyIcon}>🛒</div>
             <h1>Кошик порожній</h1>
             <p>Додайте товари з нашого магазину</p>
@@ -26,13 +26,13 @@ export default function CartPage() {
   return (
     <div className={styles.page}>
       <div className="container">
-        <div className={styles.header}>
+        <div className={`${styles.header} animate-slide-up delay-75`}>
           <h1>Кошик</h1>
           <button className="btn btn-ghost" onClick={clearCart}>Очистити</button>
         </div>
 
         <div className={styles.layout}>
-          <div className={styles.items}>
+          <div className={`${styles.items} animate-slide-up delay-150`}>
             {items.map(item => (
               <div key={item.productId} className={styles.item}>
                 <div className={styles.image}>
@@ -57,7 +57,7 @@ export default function CartPage() {
             ))}
           </div>
 
-          <div className={styles.summary}>
+          <div className={`${styles.summary} animate-slide-up delay-300`}>
             <h2>Підсумок</h2>
             <div className={styles.summaryRow}>
               <span>Проміжна сума</span>

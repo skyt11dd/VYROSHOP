@@ -45,18 +45,18 @@ export function Hero() {
     <section className={styles.hero}>
       <div className={styles.heroInner}>
         {/* Left — Main Banner */}
-        <div className={styles.mainBanner}>
+        <div className={`${styles.mainBanner} animate-scale-up`}>
           <div className={styles.bannerContent}>
-            <h1 className={styles.headline}>
+            <h1 className={`${styles.headline} animate-slide-up delay-150`}>
               VYRO.<br />
               Твій стиль.
             </h1>
 
-            <p className={styles.tagline}>
+            <p className={`${styles.tagline} animate-slide-up delay-225`}>
               Оригінальні пристрої та преміальні рідини.
             </p>
 
-            <div className={styles.bannerActions}>
+            <div className={`${styles.bannerActions} animate-slide-up delay-300`}>
               <Link href="/shop" className={styles.btnShop}>
                 Перейти до каталогу
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -68,8 +68,9 @@ export function Hero() {
         </div>
 
         <div className={styles.catGrid}>
-          {categories.map((cat) => {
+          {categories.map((cat, idx) => {
             const Icon = cat.icon;
+            const staggerClass = `animate-slide-right delay-${(idx + 1) * 75}`;
             
             const cardContent = (
               <>
@@ -95,14 +96,14 @@ export function Hero() {
 
             if (cat.disabled) {
               return (
-                <div key={cat.slug} className={`${styles.catCard} ${styles.disabled}`}>
+                <div key={cat.slug} className={`${styles.catCard} ${styles.disabled} ${staggerClass}`}>
                   {cardContent}
                 </div>
               );
             }
 
             return (
-              <Link key={cat.slug} href={cat.href} className={styles.catCard}>
+              <Link key={cat.slug} href={cat.href} className={`${styles.catCard} ${staggerClass}`}>
                 {cardContent}
               </Link>
             );

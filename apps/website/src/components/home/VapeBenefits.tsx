@@ -37,7 +37,7 @@ export function VapeBenefits() {
       <div className="container">
         <div className={styles.grid}>
           {benefits.map((b, i) => (
-            <div key={i} className={styles.item}>
+            <div key={i} className={`${styles.item} animate-slide-up delay-${(i + 3) * 75}`}>
               <div className={styles.iconWrap}>{b.icon}</div>
               <div className={styles.info}>
                 <h4 className={styles.title}>{b.title}</h4>

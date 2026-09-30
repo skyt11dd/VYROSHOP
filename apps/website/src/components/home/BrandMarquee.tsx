@@ -15,7 +15,7 @@ const brands = [
 
 export function BrandMarquee() {
   return (
-    <section className={styles.section}>
+    <section className={`${styles.section} animate-slide-up delay-400`}>
       <div className="container">
         <div className={styles.wrapper}>
           <span className={styles.title}>Трендові бренди:</span>

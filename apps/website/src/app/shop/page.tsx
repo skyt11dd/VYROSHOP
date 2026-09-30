@@ -57,7 +57,7 @@ function ShopContent() {
   return (
     <div className={styles.page}>
       <div className="container">
-        <div className={styles.top}>
+        <div className={`${styles.top} animate-slide-up delay-75`}>
             <h1 className={styles.title}>Каталог вейп-шопу</h1>
             <p className={styles.subtitle}>{total} товарів в наявності</p>
           <div className={styles.controls}>
