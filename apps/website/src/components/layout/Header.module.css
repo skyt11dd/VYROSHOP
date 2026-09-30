@@ -121,9 +121,9 @@
 }
 
 @media (max-width: 768px) {
-  .menuBtn { display: flex; margin-left: -8px; }
-  .logoImg { width: 90px; height: 26px; }
-  .ageBadge { display: none; } /* Hide 18+ on very small screens to save space */
-  .inner { gap: 12px; }
-  .actions { gap: 0px; }
+  .menuBtn { display: none; }
+  .actions { display: none; }
+  .logoImg { width: 100px; height: 28px; }
+  .ageBadge { display: none; } 
+  .inner { justify-content: center; }
 }

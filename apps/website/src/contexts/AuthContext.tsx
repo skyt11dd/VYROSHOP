@@ -21,7 +21,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const handleAuth = async () => {
       // 1. Try Telegram Auto-Login
-      const tgUser = (window as any).Telegram?.WebApp?.initDataUnsafe?.user;
+      const tgWebApp = (window as any).Telegram?.WebApp;
+      if (tgWebApp) {
+        try {
+          tgWebApp.expand();
+        } catch(e) {}
+      }
+
+      const tgUser = tgWebApp?.initDataUnsafe?.user;
       if (tgUser && !localStorage.getItem('vyro_token')) {
         try {
           const res = await api.telegramAuth({
