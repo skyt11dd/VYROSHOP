@@ -107,42 +107,40 @@
   overflow: hidden;
 }
 
-.catCard:hover {
+.catCard:hover:not(.disabled) {
   background: #ffffff;
   border-color: #09090b;
   transform: translateX(-4px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
-/* Category Image */
-.catImgWrap {
-  width: 72px;
-  height: 72px;
+.catCard.disabled {
+  opacity: 0.5;
+  filter: grayscale(100%);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Category Icon */
+.catIconWrap {
+  width: 56px;
+  height: 56px;
   flex-shrink: 0;
   border-radius: 12px;
   background: #ffffff;
-  border: 1px solid #f0f0f2;
+  border: 1px solid #ececee;
+  color: #09090b;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  transition: border-color 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.catCard:hover .catImgWrap {
-  border-color: #d4d4d8;
-}
-
-.catImg {
-  object-fit: contain;
-  width: 56px;
-  height: 56px;
-  mix-blend-mode: multiply;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.catCard:hover .catImg {
-  transform: scale(1.12);
+.catCard:hover:not(.disabled) .catIconWrap {
+  background: #09090b;
+  border-color: #09090b;
+  color: #ffffff;
+  transform: scale(1.05) rotate(-3deg);
 }
 
 /* Category Info */
@@ -154,11 +152,28 @@
   min-width: 0;
 }
 
+.catTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .catTitle {
   font-size: 15px;
   font-weight: 800;
   color: #09090b;
   letter-spacing: -0.01em;
+}
+
+.badgeSoon {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  background: #ececee;
+  color: #71717a;
+  border-radius: 4px;
 }
 
 .catSub {
@@ -184,7 +199,7 @@
   transition: all 0.2s ease;
 }
 
-.catCard:hover .catArrow {
+.catCard:hover:not(.disabled) .catArrow {
   background: #09090b;
   color: #ffffff;
   transform: translateX(2px);
@@ -255,11 +270,7 @@
     border-radius: 14px;
     gap: 8px;
   }
-  .catImgWrap {
-    width: 64px;
-    height: 64px;
-  }
-  .catImg {
+  .catIconWrap {
     width: 48px;
     height: 48px;
   }
