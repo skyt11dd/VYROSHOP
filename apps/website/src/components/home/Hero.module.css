@@ -115,10 +115,21 @@
 }
 
 .catCard.disabled {
-  opacity: 0.5;
-  filter: grayscale(100%);
+  background: #f4f4f5;
+  border-color: #e4e4e7;
   cursor: not-allowed;
   pointer-events: none;
+}
+
+.catCard.disabled .catIconWrap {
+  background: #e4e4e7;
+  border-color: #d4d4d8;
+  color: #a1a1aa;
+}
+
+.catCard.disabled .catTitle,
+.catCard.disabled .catSub {
+  color: #a1a1aa;
 }
 
 /* Category Icon */
