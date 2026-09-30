@@ -7,7 +7,7 @@ import styles from './MobileMenu.module.css';
 interface MobileMenuProps {
   open: boolean;
   onClose: () => void;
-  navLinks: { href: string; label: string }[];
+  navLinks: { href: string; label: string; disabled?: boolean }[];
 }
 
 export function MobileMenu({ open, onClose, navLinks }: MobileMenuProps) {
@@ -37,9 +37,15 @@ export function MobileMenu({ open, onClose, navLinks }: MobileMenuProps) {
           </button>
         </div>
         <nav className={styles.nav}>
-          {navLinks.map(l => (
-            <Link key={l.href} href={l.href} className={styles.link} onClick={onClose}>{l.label}</Link>
-          ))}
+          {navLinks.map(l => 
+            l.disabled ? (
+              <span key={l.href} className={`${styles.link} ${styles.linkDisabled}`}>
+                {l.label}
+              </span>
+            ) : (
+              <Link key={l.href} href={l.href} className={styles.link} onClick={onClose}>{l.label}</Link>
+            )
+          )}
           <div className={styles.divider} />
           <Link href="/cart" className={styles.link} onClick={onClose}>Кошик</Link>
           <Link href="/account" className={styles.link} onClick={onClose}>Особистий кабінет</Link>

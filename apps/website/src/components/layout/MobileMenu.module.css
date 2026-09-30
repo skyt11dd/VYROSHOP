@@ -27,4 +27,5 @@
   transition: background var(--transition);
 }
 .link:hover { background: var(--surface-2); }
+.linkDisabled { color: var(--text-muted); opacity: 0.5; cursor: not-allowed; pointer-events: none; }
 .divider { height: 1px; background: var(--border); margin: 8px 8px; }

@@ -9,11 +9,11 @@ import { MobileMenu } from '@/components/layout/MobileMenu';
 import styles from './Header.module.css';
 
 const navLinks = [
-  { href: '/shop', label: 'Каталог' },
-  { href: '/shop?category=pods', label: 'POD-системи' },
-  { href: '/shop?category=liquids', label: 'Рідини' },
-  { href: '/shop?category=disposables', label: 'Одноразки' },
-  { href: '/shop?category=cartridges', label: 'Картриджі' },
+  { href: '/shop', label: 'Каталог', disabled: false },
+  { href: '/shop?category=pods', label: 'POD-системи', disabled: true },
+  { href: '/shop?category=disposables', label: 'Одноразки', disabled: true },
+  { href: '/shop?category=liquids', label: 'Рідини', disabled: false },
+  { href: '/shop?category=cartridges', label: 'Картриджі', disabled: false },
 ];
 
 export function Header() {
@@ -59,9 +59,17 @@ export function Header() {
 
           {/* Desktop nav */}
           <nav className={styles.nav}>
-            {navLinks.map(l => (
-              <Link key={l.href} href={l.href} className={styles.navLink}>{l.label}</Link>
-            ))}
+            {navLinks.map(l => 
+              l.disabled ? (
+                <span key={l.href} className={`${styles.navLink} ${styles.navLinkDisabled}`}>
+                  {l.label}
+                </span>
+              ) : (
+                <Link key={l.href} href={l.href} className={styles.navLink}>
+                  {l.label}
+                </Link>
+              )
+            )}
           </nav>
 
           {/* Actions */}

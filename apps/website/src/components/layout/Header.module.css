@@ -77,6 +77,12 @@
   background: #f4f4f5;
 }
 
+.navLinkDisabled {
+  color: #a1a1aa;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 .actions {
   display: flex;
   align-items: center;
