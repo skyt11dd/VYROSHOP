@@ -31,6 +31,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           try {
             tgWebApp.ready();
             tgWebApp.expand();
+            if (typeof tgWebApp.requestFullscreen === 'function') {
+              tgWebApp.requestFullscreen();
+            }
           } catch(e) {}
 
           const tgUser = tgWebApp.initDataUnsafe?.user;

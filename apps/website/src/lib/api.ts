@@ -6,6 +6,9 @@ let API_URL = process.env.NEXT_PUBLIC_API_URL || (isServer ? 'http://localhost:4
 if (!isServer && API_URL.includes('localhost')) {
   API_URL = '';
 }
+if (API_URL.endsWith('/')) {
+  API_URL = API_URL.slice(0, -1);
+}
 
 async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
   const res = await fetch(`${API_URL}${path}`, {

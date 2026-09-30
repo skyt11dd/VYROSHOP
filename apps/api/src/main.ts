@@ -20,6 +20,8 @@ const allowedOrigins = [
   'https://vyro.store',
   'https://www.vyro.store',
   'https://crm.vyro.store',
+  'https://vyroshop.online',
+  'https://www.vyroshop.online',
 ];
 
 fastify.register(cors, {
@@ -29,7 +31,8 @@ fastify.register(cors, {
       allowedOrigins.includes(origin) ||
       origin.endsWith('.railway.app') ||
       origin.endsWith('.up.railway.app') ||
-      origin.endsWith('.vercel.app')
+      origin.endsWith('.vercel.app') ||
+      origin.endsWith('.ngrok-free.app')
     ) {
       cb(null, true);
     } else {
