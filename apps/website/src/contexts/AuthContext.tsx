@@ -34,7 +34,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           } catch(e) {}
 
           const tgUser = tgWebApp.initDataUnsafe?.user;
-          if (tgUser && !localStorage.getItem('vyro_token')) {
+          if (tgUser) {
             try {
               const res = await api.telegramAuth({
                 telegramId: String(tgUser.id),

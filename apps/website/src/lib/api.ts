@@ -1,4 +1,5 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+const isServer = typeof window === 'undefined';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || (isServer ? 'http://localhost:4000' : '');
 
 async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
   const res = await fetch(`${API_URL}${path}`, {

@@ -32,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="uk" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
-        <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
+        <script src="https://telegram.org/js/telegram-web-app.js" async={false}></script>
       </head>
       <body className={inter.className}>
         <AuthProvider>
