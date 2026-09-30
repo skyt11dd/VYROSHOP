@@ -33,6 +33,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             tgWebApp.expand();
             if (typeof tgWebApp.requestFullscreen === 'function') {
               tgWebApp.requestFullscreen();
+              document.body.classList.add('tg-fullscreen');
             }
           } catch(e) {}
 

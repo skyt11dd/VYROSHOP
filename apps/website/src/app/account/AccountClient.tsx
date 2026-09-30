@@ -139,15 +139,21 @@ export default function AccountClient() {
           <div className={styles.content}>
             {tab === 'profile' && (
               <div className={styles.section}>
-                <h2>Профіль</h2>
+                <h2>Мої дані</h2>
                 <div className={styles.profileGrid}>
                   <div className={styles.field}>
-                    <label className="label">Email</label>
-                    <div className={styles.value}>{customer.email || '—'}</div>
+                    <label className="label" style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Електронна пошта</label>
+                    <div className={styles.value}>{customer.email || 'Не вказано'}</div>
                   </div>
                   <div className={styles.field}>
-                    <label className="label">Телефон</label>
-                    <div className={styles.value}>{customer.phone || '—'}</div>
+                    <label className="label" style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Номер телефону</label>
+                    <div className={styles.value}>{customer.phone || 'Не вказано'}</div>
+                  </div>
+                  <div className={styles.field}>
+                    <label className="label" style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Telegram ID</label>
+                    <div className={styles.value} style={{ fontFamily: 'monospace', fontSize: 13, color: '#71717a' }}>
+                      {customer.telegramId ? `@${customer.telegramId}` : 'Не підв\'язано'}
+                    </div>
                   </div>
                 </div>
               </div>
