@@ -6,8 +6,16 @@ export async function publicRoutes(fastify: FastifyInstance) {
   fastify.get('/products', async (req, reply) => {
     const { category, brand, search, sort = 'featured', page = '1', limit = '20', featured, popular, isNew } = req.query as Record<string, string>;
 
-    const where: any = { active: true };
-    if (category) where.category = { slug: category };
+    const BLOCKED_CATEGORIES = ['pods', 'disposables'];
+    if (category && BLOCKED_CATEGORIES.includes(category)) {
+      return { products: [], total: 0, page: 1, limit: parseInt(limit), pages: 0 };
+    }
+
+    const where: any = { 
+      active: true,
+      category: { slug: category ? category : { notIn: BLOCKED_CATEGORIES } }
+    };
+    
     if (brand) where.brand = { slug: brand };
     if (featured === 'true') where.featured = true;
     if (popular === 'true') where.popular = true;
@@ -68,7 +76,10 @@ export async function publicRoutes(fastify: FastifyInstance) {
       },
     });
 
-    if (!product) return reply.status(404).send({ error: 'Product not found' });
+    const BLOCKED_CATEGORIES = ['pods', 'disposables'];
+    if (!product || BLOCKED_CATEGORIES.includes(product.category.slug)) {
+      return reply.status(404).send({ error: 'Product not found' });
+    }
 
     // Track view
     await prisma.productView.create({ data: { productId: product.id, session: session || null } });
@@ -85,8 +96,9 @@ export async function publicRoutes(fastify: FastifyInstance) {
 
   // Categories
   fastify.get('/categories', async () => {
+    const BLOCKED_CATEGORIES = ['pods', 'disposables'];
     const categories = await prisma.category.findMany({
-      where: { active: true },
+      where: { active: true, slug: { notIn: BLOCKED_CATEGORIES } },
       orderBy: { sortOrder: 'asc' },
       include: { _count: { select: { products: { where: { active: true } } } } },
     });
@@ -107,9 +119,11 @@ export async function publicRoutes(fastify: FastifyInstance) {
     const { q, session } = req.query as { q?: string; session?: string };
     if (!q || q.length < 1) return { products: [], total: 0 };
 
+    const BLOCKED_CATEGORIES = ['pods', 'disposables'];
     const products = await prisma.product.findMany({
       where: {
         active: true,
+        category: { slug: { notIn: BLOCKED_CATEGORIES } },
         OR: [
           { name: { contains: q, mode: 'insensitive' } },
           { description: { contains: q, mode: 'insensitive' } },
