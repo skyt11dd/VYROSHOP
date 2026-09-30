@@ -31,6 +31,8 @@ export const api = {
     apiFetch<any>('/api/auth/customer/login', { method: 'POST', body: JSON.stringify({ email, password }) }),
   register: (data: any) =>
     apiFetch<any>('/api/auth/customer/register', { method: 'POST', body: JSON.stringify(data) }),
+  telegramAuth: (data: { telegramId: string; firstName?: string; lastName?: string }) =>
+    apiFetch<any>('/api/auth/customer/telegram-auth', { method: 'POST', body: JSON.stringify(data) }),
 
   // Customer (requires token)
   getProfile: (token: string) =>

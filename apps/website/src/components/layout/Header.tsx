@@ -52,10 +52,9 @@ export function Header() {
                 unoptimized
                 className={styles.logoImg}
               />
+              <span className={styles.ageBadge}>18+</span>
             </div>
           </Link>
-
-          <span className={styles.ageBadge}>18+</span>
 
           {/* Desktop nav */}
           <nav className={styles.nav}>

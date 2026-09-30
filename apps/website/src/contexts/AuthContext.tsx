@@ -19,16 +19,40 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const stored = localStorage.getItem('vyro_token');
-    if (stored) {
-      setToken(stored);
-      api.getProfile(stored).then(r => setCustomer(r.customer)).catch(() => {
-        localStorage.removeItem('vyro_token');
-        setToken(null);
-      }).finally(() => setIsLoading(false));
-    } else {
-      setIsLoading(false);
-    }
+    const handleAuth = async () => {
+      // 1. Try Telegram Auto-Login
+      const tgUser = (window as any).Telegram?.WebApp?.initDataUnsafe?.user;
+      if (tgUser && !localStorage.getItem('vyro_token')) {
+        try {
+          const res = await api.telegramAuth({
+            telegramId: String(tgUser.id),
+            firstName: tgUser.first_name,
+            lastName: tgUser.last_name,
+          });
+          setToken(res.token);
+          setCustomer(res.customer);
+          localStorage.setItem('vyro_token', res.token);
+          setIsLoading(false);
+          return;
+        } catch (e) {
+          console.error('Telegram auth failed', e);
+        }
+      }
+
+      // 2. Try Standard Token Auth
+      const stored = localStorage.getItem('vyro_token');
+      if (stored) {
+        setToken(stored);
+        api.getProfile(stored).then(r => setCustomer(r.customer)).catch(() => {
+          localStorage.removeItem('vyro_token');
+          setToken(null);
+        }).finally(() => setIsLoading(false));
+      } else {
+        setIsLoading(false);
+      }
+    };
+
+    handleAuth();
   }, []);
 
   const login = async (email: string, password: string) => {

@@ -100,7 +100,7 @@ body {
 
 @media (max-width: 768px) {
   body {
-    padding-bottom: 64px;
+    padding-bottom: calc(84px + env(safe-area-inset-bottom, 8px) + var(--tg-safe-area-inset-bottom, 0px));
   }
 }
 

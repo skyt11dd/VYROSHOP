@@ -23,6 +23,28 @@ export async function authRoutes(fastify: FastifyInstance) {
     return { token, refreshToken, customer: { id: customer.id, email: customer.email, firstName: customer.firstName, lastName: customer.lastName } };
   });
 
+  // Telegram Customer Auth
+  fastify.post('/customer/telegram-auth', async (req, reply) => {
+    const { telegramId, firstName, lastName } = req.body as any;
+
+    if (!telegramId) return reply.status(400).send({ error: 'Telegram ID required' });
+
+    let customer = await prisma.customer.findUnique({ where: { telegramId: String(telegramId) } });
+    
+    if (!customer) {
+      customer = await prisma.customer.create({
+        data: { telegramId: String(telegramId), firstName, lastName },
+      });
+    } else {
+      await prisma.customer.update({ where: { id: customer.id }, data: { lastActivityAt: new Date() } });
+    }
+
+    const token = fastify.jwt.sign({ id: customer.id, role: 'customer' }, { expiresIn: '7d' });
+    const refreshToken = fastify.jwt.sign({ id: customer.id, role: 'customer', type: 'refresh' }, { expiresIn: '30d' });
+
+    return { token, refreshToken, customer: { id: customer.id, email: customer.email, telegramId: customer.telegramId, firstName: customer.firstName, lastName: customer.lastName } };
+  });
+
   // Customer login
   fastify.post('/customer/login', async (req, reply) => {
     const { email, password } = req.body as any;

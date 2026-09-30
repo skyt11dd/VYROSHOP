@@ -9,14 +9,15 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 60px;
+    min-height: 60px;
+    padding-top: 8px;
+    padding-bottom: calc(env(safe-area-inset-bottom, 8px) + var(--tg-safe-area-inset-bottom, 0px));
     background: rgba(255, 255, 255, 0.94);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-top: 1px solid var(--border);
     z-index: 999;
-    padding-bottom: env(safe-area-inset-bottom, 0);
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-around;
     box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.04);
   }
