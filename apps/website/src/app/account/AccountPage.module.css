@@ -22,6 +22,15 @@
 .orderHeader { display: flex; align-items: center; justify-content: space-between; font-weight: 700; margin-bottom: 8px; font-size: 16px; }
 .statusBadge { background: #f4f4f5; color: #52525b; padding: 4px 10px; font-size: 12px; border-radius: 99px; }
 .orderTotal { font-size: 14px; margin-top: 12px; color: var(--text-secondary); }
+
+.editForm { display: flex; flex-direction: column; background: #ffffff; border: 1px solid #e4e4e7; border-radius: var(--radius-xl); overflow: hidden; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+.editRow { display: flex; flex-direction: column; padding: 12px 16px; border-bottom: 1px solid #f4f4f5; transition: background 0.2s; }
+.editRow:focus-within { background: #fafafa; }
+.editRow:last-child { border-bottom: none; }
+.editLabel { font-size: 12px; color: #71717a; margin-bottom: 2px; font-weight: 500; }
+.editInput { border: none; background: transparent; padding: 0; font-size: 16px; color: #18181b; outline: none; font-weight: 500; width: 100%; }
+.editInput::placeholder { color: #a1a1aa; font-weight: 400; }
+
 @media (max-width: 768px) { 
   .layout { grid-template-columns: 1fr; gap: 24px; } 
   .tabs { flex-direction: row; position: static; padding: 4px; border-radius: 14px; background: #f4f4f5; border: none; } 

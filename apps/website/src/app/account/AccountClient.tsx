@@ -211,22 +211,22 @@ export default function AccountClient() {
                     </div>
                   </div>
                 ) : (
-                  <div className={styles.profileGrid}>
-                    <div className={styles.field}>
-                      <label className="label" style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Електронна пошта</label>
-                      <input className="input" type="email" value={profileForm.email} onChange={e => setProfileForm(f => ({ ...f, email: e.target.value }))} placeholder="Введіть email..." />
+                  <div className={styles.editForm}>
+                    <div className={styles.editRow}>
+                      <label className={styles.editLabel}>Електронна пошта</label>
+                      <input className={styles.editInput} type="email" value={profileForm.email} onChange={e => setProfileForm(f => ({ ...f, email: e.target.value }))} placeholder="example@gmail.com" />
                     </div>
-                    <div className={styles.field}>
-                      <label className="label" style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Номер телефону</label>
-                      <input className="input" type="tel" value={profileForm.phone} onChange={e => setProfileForm(f => ({ ...f, phone: e.target.value }))} placeholder="+380..." />
+                    <div className={styles.editRow}>
+                      <label className={styles.editLabel}>Номер телефону</label>
+                      <input className={styles.editInput} type="tel" value={profileForm.phone} onChange={e => setProfileForm(f => ({ ...f, phone: e.target.value }))} placeholder="+380..." />
                     </div>
-                    <div className={styles.field}>
-                      <label className="label" style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Місто доставки</label>
-                      <input className="input" type="text" value={profileForm.city} onChange={e => setProfileForm(f => ({ ...f, city: e.target.value }))} placeholder="Наприклад: Київ" />
+                    <div className={styles.editRow}>
+                      <label className={styles.editLabel}>Місто доставки</label>
+                      <input className={styles.editInput} type="text" value={profileForm.city} onChange={e => setProfileForm(f => ({ ...f, city: e.target.value }))} placeholder="Наприклад: Київ" />
                     </div>
-                    <div className={styles.field}>
-                      <label className="label" style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Відділення / Поштомат (Нова Пошта)</label>
-                      <input className="input" type="text" value={profileForm.street} onChange={e => setProfileForm(f => ({ ...f, street: e.target.value }))} placeholder="Відділення №1" />
+                    <div className={styles.editRow}>
+                      <label className={styles.editLabel}>Відділення / Поштомат (Нова Пошта)</label>
+                      <input className={styles.editInput} type="text" value={profileForm.street} onChange={e => setProfileForm(f => ({ ...f, street: e.target.value }))} placeholder="Відділення №1" />
                     </div>
                   </div>
                 )}

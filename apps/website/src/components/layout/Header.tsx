@@ -20,18 +20,37 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [tgPadding, setTgPadding] = useState(0);
   const { count } = useCart();
   const { customer } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Check if we are in Telegram Mobile WebApp
+    try {
+      const tg = (window as any).Telegram?.WebApp;
+      if (tg) {
+        // If requestFullscreen is available, Telegram injects native top bar overlay.
+        // We MUST push the header down by at least 44px (safe area for buttons).
+        if (typeof tg.requestFullscreen === 'function') {
+          // If the device provides exact safe area, use it (usually ~44px to 54px), else default to 44px
+          const safeTop = tg.contentSafeAreaInset?.top || tg.safeAreaInset?.top || 44;
+          setTgPadding(safeTop > 0 ? safeTop : 44);
+        }
+      }
+    } catch (e) {}
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <>
-      <header className={`${styles.header} ${scrolled ? styles.scrolled : ''} animate-fade-in`}>
+      <header 
+        className={`${styles.header} ${scrolled ? styles.scrolled : ''} animate-fade-in`}
+        style={tgPadding > 0 ? { paddingTop: `${tgPadding}px`, height: `calc(var(--header-height) + ${tgPadding}px)` } : undefined}
+      >
         <div className={`container ${styles.inner}`}>
           {/* Mobile menu toggle */}
           <button className={`${styles.menuBtn} btn btn-ghost btn-icon`} onClick={() => setMobileOpen(true)} aria-label="Меню">
