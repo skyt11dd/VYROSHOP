@@ -1,5 +1,11 @@
 const isServer = typeof window === 'undefined';
-const API_URL = process.env.NEXT_PUBLIC_API_URL || (isServer ? 'http://localhost:4000' : '');
+let API_URL = process.env.NEXT_PUBLIC_API_URL || (isServer ? 'http://localhost:4000' : '');
+
+// CRITICAL FIX: If running in the browser on a phone via Ngrok, but .env has localhost,
+// we MUST force relative paths to use the Next.js proxy rewrite!
+if (!isServer && API_URL.includes('localhost')) {
+  API_URL = '';
+}
 
 async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
   const res = await fetch(`${API_URL}${path}`, {
