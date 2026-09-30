@@ -46,9 +46,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               localStorage.setItem('vyro_token', res.token);
               setIsLoading(false);
               return;
-            } catch (e) {
+            } catch (e: any) {
+              alert('Помилка авторизації Telegram: ' + (e.message || JSON.stringify(e)));
               console.error('Telegram auth failed', e);
             }
+          } else if (tgWebApp.platform && tgWebApp.platform !== 'unknown') {
+            // alert('Не вдалося отримати дані Telegram. Відкрийте застосунок через кнопку меню бота!');
           }
         }
 
