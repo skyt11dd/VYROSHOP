@@ -50,18 +50,37 @@ export default function AccountClient() {
     if (!token) return;
     setLoading(true);
     try {
-      await api.updateProfile(token, { email: profileForm.email, phone: profileForm.phone });
+      // Only send non-empty profile fields to avoid unique constraint issues
+      const profileData: Record<string, string> = {};
+      if (profileForm.email) profileData.email = profileForm.email;
+      if (profileForm.phone) profileData.phone = profileForm.phone;
       
-      if (address?.id) {
-        await api.updateAddress(token, address.id, { city: profileForm.city, street: profileForm.street, isDefault: true });
-      } else {
-        await api.addAddress(token, { city: profileForm.city, street: profileForm.street, isDefault: true });
+      if (Object.keys(profileData).length > 0) {
+        await api.updateProfile(token, profileData);
+      }
+      
+      // Only save address if city or street is filled
+      if (profileForm.city || profileForm.street) {
+        if (address?.id) {
+          await api.updateAddress(token, address.id, { 
+            city: profileForm.city || 'Не вказано', 
+            street: profileForm.street || 'Не вказано', 
+            isDefault: true 
+          });
+        } else {
+          await api.addAddress(token, { 
+            city: profileForm.city || 'Не вказано', 
+            street: profileForm.street || 'Не вказано', 
+            isDefault: true 
+          });
+        }
       }
 
       setIsEditingProfile(false);
       window.location.reload();
     } catch (e: any) {
-      alert('Помилка: ' + e.message);
+      const msg = e?.message || 'Невідома помилка';
+      alert('Помилка збереження: ' + msg);
     } finally {
       setLoading(false);
     }

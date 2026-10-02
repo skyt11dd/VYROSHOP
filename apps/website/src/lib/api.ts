@@ -11,15 +11,20 @@ if (API_URL.endsWith('/')) {
 }
 
 async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
-  const res = await fetch(`${API_URL}${path}`, {
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...(options?.headers || {}),
-    },
-  });
+  let res: Response;
+  try {
+    res = await fetch(`${API_URL}${path}`, {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        ...(options?.headers || {}),
+      },
+    });
+  } catch (networkErr: any) {
+    throw new Error('Немає з\'єднання з сервером. Спробуйте пізніше.');
+  }
   if (!res.ok) {
-    const err = await res.json().catch(() => ({ error: 'Unknown error' }));
+    const err = await res.json().catch(() => ({ error: `Помилка сервера (${res.status})` }));
     throw new Error(err.error || `API error ${res.status}`);
   }
   return res.json();

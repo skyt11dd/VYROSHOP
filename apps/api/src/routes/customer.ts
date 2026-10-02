@@ -20,11 +20,24 @@ export async function customerRoutes(fastify: FastifyInstance) {
     return { customer };
   });
 
-  fastify.patch('/profile', { preHandler: auth }, async (req) => {
+  fastify.patch('/profile', { preHandler: auth }, async (req, reply) => {
     const { id } = (req as any).user;
-    const data = req.body as any;
-    const customer = await prisma.customer.update({ where: { id }, data });
-    return { customer };
+    const body = req.body as any;
+    // Only allow safe fields to be updated
+    const data: any = {};
+    if (body.email !== undefined) data.email = body.email || null;
+    if (body.phone !== undefined) data.phone = body.phone || null;
+    if (body.firstName !== undefined) data.firstName = body.firstName;
+    if (body.lastName !== undefined) data.lastName = body.lastName;
+    try {
+      const customer = await prisma.customer.update({ where: { id }, data });
+      return { customer };
+    } catch (e: any) {
+      if (e.code === 'P2002') {
+        return reply.status(400).send({ error: 'Цей email вже використовується іншим акаунтом' });
+      }
+      return reply.status(500).send({ error: e.message || 'Помилка оновлення профілю' });
+    }
   });
 
   // Orders
