@@ -1,50 +1,75 @@
-.page { padding-top: calc(var(--header-height) + 32px); padding-bottom: 100px; background: #fafafa; min-height: 100vh; }
-.authCard { max-width: 480px; margin: 0 auto; background: var(--surface); border: 1px solid var(--border); border-radius: 28px; padding: 48px 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.04); }
-.authCard h1 { font-size: 32px; font-weight: 800; margin-bottom: 28px; text-align: center; letter-spacing: -0.02em; }
-.error { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); color: var(--error); padding: 14px 16px; border-radius: 16px; font-size: 14px; margin-bottom: 20px; font-weight: 500; }
+.page { padding-top: calc(var(--header-height) + 20px); padding-bottom: 120px; min-height: 100vh; }
+
+/* ── Auth Card ────────────────────────────── */
+.authCard { max-width: 480px; margin: 0 auto; background: #fff; border-radius: 24px; padding: 48px 36px; box-shadow: 0 8px 32px rgba(0,0,0,0.06); border: 1px solid #f0f0f2; }
+.authCard h1 { font-size: 28px; font-weight: 800; margin-bottom: 28px; text-align: center; letter-spacing: -0.03em; }
+.error { background: #fef2f2; border: 1px solid #fecaca; color: #dc2626; padding: 14px 16px; border-radius: 14px; font-size: 14px; margin-bottom: 20px; font-weight: 500; }
 .form { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
-.field { display: flex; flex-direction: column; gap: 8px; }
-.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
-/* Profile Header Card */
-.profileHeaderCard { background: linear-gradient(135deg, #09090b 0%, #27272a 100%); border-radius: 28px; padding: 32px 40px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; color: white; box-shadow: 0 16px 32px rgba(0,0,0,0.1); }
-.profileInfo { display: flex; align-items: center; gap: 20px; }
-.avatar { width: 72px; height: 72px; border-radius: 99px; background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; color: white; }
-.profileText h1 { font-size: 32px; font-weight: 800; margin-bottom: 4px; letter-spacing: -0.02em; }
-.profileText p { color: rgba(255,255,255,0.7); font-size: 15px; }
-.btnLogout { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 100px; padding: 10px 20px; font-weight: 600; font-size: 14px; transition: all 0.2s; cursor: pointer; }
-.btnLogout:hover { background: white; color: #09090b; }
+/* ── Profile Header ─────────────────────── */
+.profileHeader { display: flex; align-items: center; gap: 18px; margin-bottom: 28px; }
+.avatar { width: 64px; height: 64px; border-radius: 20px; background: #09090b; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 800; color: white; letter-spacing: 0.03em; flex-shrink: 0; }
+.profileMeta { flex: 1; min-width: 0; }
+.profileMeta h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; color: #09090b; }
+.profileMeta p { font-size: 14px; color: #a1a1aa; margin-top: 2px; }
+.btnLogout { background: none; border: none; color: #a1a1aa; font-size: 13px; font-weight: 600; cursor: pointer; padding: 0; transition: color 0.2s; }
+.btnLogout:hover { color: #ef4444; }
 
-.layout { display: grid; grid-template-columns: 240px 1fr; gap: 40px; align-items: start; }
-.tabs { display: flex; flex-direction: column; gap: 8px; background: transparent; padding: 0; position: sticky; top: calc(var(--header-height) + 32px); }
-.tabBtn { padding: 14px 20px; border-radius: 16px; font-size: 15px; font-weight: 600; text-align: left; background: none; border: none; cursor: pointer; color: #71717a; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
-.tabBtn:hover { color: #09090b; background: rgba(0,0,0,0.03); }
-.tabBtn.active { background: #ffffff; color: #09090b; box-shadow: 0 4px 16px rgba(0,0,0,0.04); border: 1px solid #e4e4e7; }
-.content { animation: pageFadeIn 0.4s ease-out; }
-.section { background: #ffffff; border: 1px solid #e4e4e7; border-radius: 28px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
-.section h2 { font-size: 24px; font-weight: 800; margin-bottom: 28px; letter-spacing: -0.01em; }
-.orderCard { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; margin-bottom: 12px; transition: all 0.2s ease; }
-.orderCard:hover { border-color: #d1d1d6; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
-.orderHeader { display: flex; align-items: center; justify-content: space-between; font-weight: 700; margin-bottom: 8px; font-size: 16px; }
-.statusBadge { background: #f4f4f5; color: #52525b; padding: 4px 10px; font-size: 12px; border-radius: 99px; }
-.orderTotal { font-size: 14px; margin-top: 12px; color: var(--text-secondary); }
+/* ── Tabs (iOS segmented) ─────────────── */
+.tabs { display: flex; gap: 0; background: #f4f4f5; padding: 4px; border-radius: 14px; margin-bottom: 24px; }
+.tabBtn { flex: 1; padding: 10px 0; border-radius: 11px; font-size: 14px; font-weight: 600; text-align: center; background: none; border: none; cursor: pointer; color: #a1a1aa; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
+.tabBtn:hover { color: #52525b; }
+.tabBtn.active { background: #ffffff; color: #09090b; box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); }
 
-.editForm { display: flex; flex-direction: column; background: #ffffff; border: 1px solid #e4e4e7; border-radius: var(--radius-xl); overflow: hidden; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
-.editRow { display: flex; flex-direction: column; padding: 12px 16px; border-bottom: 1px solid #f4f4f5; transition: background 0.2s; }
+/* ── Content ────────────────────────────── */
+.content { animation: accountFadeIn 0.35s ease-out; }
+@keyframes accountFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── Section Header ─────────────────────── */
+.sectionHeader { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.sectionTitle { font-size: 18px; font-weight: 800; letter-spacing: -0.01em; color: #09090b; }
+.btnEdit { background: none; border: none; color: #09090b; font-size: 14px; font-weight: 600; cursor: pointer; padding: 6px 0; }
+.editActions { display: flex; gap: 12px; }
+.btnCancel { background: none; border: none; color: #a1a1aa; font-size: 14px; font-weight: 600; cursor: pointer; padding: 6px 0; }
+.btnSave { background: #09090b; color: white; border: none; border-radius: 10px; padding: 8px 20px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+.btnSave:hover { background: #27272a; transform: scale(1.02); }
+.btnSave:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* ── Data Rows (iOS Settings style) ────── */
+.dataCard { background: #ffffff; border: 1px solid #f0f0f2; border-radius: 18px; overflow: hidden; }
+.dataRow { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid #f4f4f5; }
+.dataRow:last-child { border-bottom: none; }
+.dataLabel { font-size: 15px; font-weight: 500; color: #09090b; }
+.dataValue { font-size: 15px; color: #a1a1aa; font-weight: 400; text-align: right; max-width: 55%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dataValueFilled { color: #52525b; }
+
+/* ── Edit Form ─────────────────────────── */
+.editForm { background: #ffffff; border: 1px solid #f0f0f2; border-radius: 18px; overflow: hidden; }
+.editRow { display: flex; flex-direction: column; padding: 12px 18px; border-bottom: 1px solid #f4f4f5; transition: background 0.15s; }
 .editRow:focus-within { background: #fafafa; }
 .editRow:last-child { border-bottom: none; }
-.editLabel { font-size: 12px; color: #71717a; margin-bottom: 2px; font-weight: 500; }
-.editInput { border: none; background: transparent; padding: 0; font-size: 16px; color: #18181b; outline: none; font-weight: 500; width: 100%; }
-.editInput::placeholder { color: #a1a1aa; font-weight: 400; }
+.editLabel { font-size: 12px; color: #a1a1aa; margin-bottom: 4px; font-weight: 500; letter-spacing: 0.02em; }
+.editInput { border: none; background: transparent; padding: 2px 0; font-size: 16px; color: #09090b; outline: none; font-weight: 500; width: 100%; }
+.editInput::placeholder { color: #d4d4d8; font-weight: 400; }
 
-@media (max-width: 768px) { 
-  .layout { grid-template-columns: 1fr; gap: 24px; } 
-  .tabs { flex-direction: row; position: static; padding: 4px; border-radius: 20px; background: #f4f4f5; border: none; overflow-x: auto; scrollbar-width: none; } 
-  .tabs::-webkit-scrollbar { display: none; }
-  .tabBtn { padding: 12px 16px; font-size: 14px; white-space: nowrap; flex: none; text-align: center; }
-  .tabBtn.active { background: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
-  .section { padding: 24px; border-radius: 24px; }
-  .authCard { padding: 32px 24px; border-radius: 24px; border: none; box-shadow: none; background: transparent; }
-  .profileHeaderCard { flex-direction: column; align-items: flex-start; gap: 24px; padding: 28px 24px; border-radius: 24px; }
-  .btnLogout { width: 100%; text-align: center; }
+/* ── Orders ─────────────────────────────── */
+.orderCard { background: #ffffff; border: 1px solid #f0f0f2; border-radius: 16px; padding: 18px 20px; margin-bottom: 12px; transition: all 0.2s ease; }
+.orderCard:hover { border-color: #e4e4e7; box-shadow: 0 4px 14px rgba(0,0,0,0.03); }
+.orderHeader { display: flex; align-items: center; justify-content: space-between; font-weight: 700; margin-bottom: 6px; font-size: 15px; }
+.statusBadge { background: #f4f4f5; color: #71717a; padding: 4px 10px; font-size: 11px; font-weight: 600; border-radius: 99px; letter-spacing: 0.02em; }
+.orderTotal { font-size: 14px; margin-top: 10px; color: #71717a; }
+
+/* ── Empty States ───────────────────────── */
+.emptyState { text-align: center; padding: 48px 24px; }
+.emptyIcon { width: 56px; height: 56px; margin: 0 auto 16px; background: #f4f4f5; border-radius: 16px; display: flex; align-items: center; justify-content: center; }
+.emptyText { font-size: 15px; color: #a1a1aa; font-weight: 500; }
+
+/* ── Responsive ─────────────────────────── */
+@media (max-width: 768px) {
+  .page { padding-top: calc(var(--header-height) + 12px); }
+  .authCard { padding: 32px 24px; border-radius: 20px; border: none; box-shadow: none; background: transparent; }
+  .dataRow { padding: 13px 16px; }
+  .editRow { padding: 11px 16px; }
 }
