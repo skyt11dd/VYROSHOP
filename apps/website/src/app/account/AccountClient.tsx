@@ -151,14 +151,17 @@ export default function AccountClient() {
   return (
     <div className={styles.page}>
       <div className="container">
-        <div className={styles.header}>
-          <div>
-            <h1>Мій акаунт</h1>
-            <p style={{ color: 'var(--text-secondary)' }}>
-              {customer.firstName} {customer.lastName}
-            </p>
+        <div className={styles.profileHeaderCard}>
+          <div className={styles.profileInfo}>
+            <div className={styles.avatar}>
+              {customer.firstName?.[0]}{customer.lastName?.[0]}
+            </div>
+            <div className={styles.profileText}>
+              <h1>{customer.firstName} {customer.lastName}</h1>
+              <p>Мій акаунт</p>
+            </div>
           </div>
-          <button className="btn btn-outline" onClick={() => { logout(); router.push('/'); }}>Вийти</button>
+          <button className={styles.btnLogout} onClick={() => { logout(); router.push('/'); }}>Вийти з акаунта</button>
         </div>
 
         <div className={styles.layout}>
@@ -170,7 +173,7 @@ export default function AccountClient() {
             ))}
           </nav>
 
-          <div className={styles.content}>
+          <div className={styles.content} key={tab}>
             {tab === 'profile' && (
               <div className={styles.section}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
