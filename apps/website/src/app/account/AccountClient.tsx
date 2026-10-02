@@ -50,11 +50,21 @@ export default function AccountClient() {
     if (!token) return;
     setLoading(true);
     try {
+      // Update profile fields
       await api.updateProfile(token, { email: profileForm.email, phone: profileForm.phone });
-      await api.addAddress(token, { city: profileForm.city, street: profileForm.street, isDefault: true });
-      // Trigger a re-fetch of the customer profile to update context
+      
+      // Save or update address
+      if (address?.id) {
+        // Update existing address
+        await api.updateAddress(token, address.id, { city: profileForm.city, street: profileForm.street, isDefault: true });
+      } else {
+        // Create new address
+        await api.addAddress(token, { city: profileForm.city, street: profileForm.street, isDefault: true });
+      }
+
+      // Re-fetch profile to update context without re-login
       const res = await api.getProfile(token);
-      login(profileForm.email || customer.email, customer.password || ''); // Mock reload by updating context or reload window
+      setIsEditingProfile(false);
       window.location.reload();
     } catch (e: any) {
       alert('Помилка: ' + e.message);

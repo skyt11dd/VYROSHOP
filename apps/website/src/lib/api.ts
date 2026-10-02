@@ -76,4 +76,8 @@ export const api = {
     apiFetch<any>('/api/customer/addresses', {
       method: 'POST', body: JSON.stringify(data), headers: { Authorization: `Bearer ${token}` }
     }),
+  updateAddress: (token: string, addressId: string, data: any) =>
+    apiFetch<any>(`/api/customer/addresses/${addressId}`, {
+      method: 'PATCH', body: JSON.stringify(data), headers: { Authorization: `Bearer ${token}` }
+    }),
 };

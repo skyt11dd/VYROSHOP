@@ -156,4 +156,16 @@ export async function customerRoutes(fastify: FastifyInstance) {
     const address = await prisma.address.create({ data: { ...data, customerId } });
     return reply.status(201).send({ address });
   });
+
+  fastify.patch('/addresses/:addressId', { preHandler: auth }, async (req, reply) => {
+    const customerId = (req as any).user.id;
+    const { addressId } = req.params as { addressId: string };
+    const data = req.body as any;
+    // Verify ownership
+    const existing = await prisma.address.findFirst({ where: { id: addressId, customerId } });
+    if (!existing) return reply.status(404).send({ error: 'Address not found' });
+    if (data.isDefault) await prisma.address.updateMany({ where: { customerId, id: { not: addressId } }, data: { isDefault: false } });
+    const address = await prisma.address.update({ where: { id: addressId }, data });
+    return { address };
+  });
 }
