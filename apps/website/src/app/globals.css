@@ -25,7 +25,9 @@
   --transition: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
   --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.06);
-  --header-height: 64px;
+  --base-header-height: 64px;
+  --tg-safe-top: 0px;
+  --header-height: calc(var(--base-header-height) + var(--tg-safe-top));
 }
 
 *, *::before, *::after {
@@ -102,12 +104,6 @@ body {
   body {
     padding-bottom: calc(110px + env(safe-area-inset-bottom, 12px) + var(--tg-safe-area-inset-bottom, 0px));
   }
-}
-
-/* Telegram Mini App Fullscreen Overrides */
-body.tg-fullscreen header {
-  padding-top: max(44px, var(--tg-content-safe-area-inset-top, var(--tg-safe-area-inset-top, 44px))) !important;
-  height: calc(var(--header-height) + max(44px, var(--tg-content-safe-area-inset-top, var(--tg-safe-area-inset-top, 44px)))) !important;
 }
 
 a {

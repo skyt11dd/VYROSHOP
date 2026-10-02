@@ -186,26 +186,34 @@ export default function AccountClient() {
                 </div>
                 
                 {!isEditingProfile ? (
-                  <div className={styles.profileGrid}>
-                    <div className={styles.field}>
-                      <label className="label" style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Електронна пошта</label>
-                      <div className={styles.value}>{customer.email || 'Не вказано'}</div>
+                  <div className={styles.editForm}>
+                    <div className={styles.editRow}>
+                      <label className={styles.editLabel}>Електронна пошта</label>
+                      <div className={styles.editInput} style={{ padding: '4px 0', color: customer.email ? 'var(--text)' : 'var(--text-secondary)' }}>
+                        {customer.email || 'Не вказано'}
+                      </div>
                     </div>
-                    <div className={styles.field}>
-                      <label className="label" style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Номер телефону</label>
-                      <div className={styles.value}>{customer.phone || 'Не вказано'}</div>
+                    <div className={styles.editRow}>
+                      <label className={styles.editLabel}>Номер телефону</label>
+                      <div className={styles.editInput} style={{ padding: '4px 0', color: customer.phone ? 'var(--text)' : 'var(--text-secondary)' }}>
+                        {customer.phone || 'Не вказано'}
+                      </div>
                     </div>
-                    <div className={styles.field}>
-                      <label className="label" style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Місто доставки</label>
-                      <div className={styles.value}>{address?.city || 'Не вказано'}</div>
+                    <div className={styles.editRow}>
+                      <label className={styles.editLabel}>Місто доставки</label>
+                      <div className={styles.editInput} style={{ padding: '4px 0', color: address?.city ? 'var(--text)' : 'var(--text-secondary)' }}>
+                        {address?.city || 'Не вказано'}
+                      </div>
                     </div>
-                    <div className={styles.field}>
-                      <label className="label" style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Відділення / Поштомат (Нова Пошта)</label>
-                      <div className={styles.value}>{address?.street || 'Не вказано'}</div>
+                    <div className={styles.editRow}>
+                      <label className={styles.editLabel}>Відділення / Поштомат (Нова Пошта)</label>
+                      <div className={styles.editInput} style={{ padding: '4px 0', color: address?.street ? 'var(--text)' : 'var(--text-secondary)' }}>
+                        {address?.street || 'Не вказано'}
+                      </div>
                     </div>
-                    <div className={styles.field}>
-                      <label className="label" style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Telegram ID</label>
-                      <div className={styles.value} style={{ fontFamily: 'monospace', fontSize: 13, color: '#71717a' }}>
+                    <div className={styles.editRow}>
+                      <label className={styles.editLabel}>Telegram ID</label>
+                      <div className={styles.editInput} style={{ padding: '4px 0', fontFamily: 'monospace', color: customer.telegramId ? '#71717a' : 'var(--text-secondary)' }}>
                         {customer.telegramId ? `@${customer.telegramId}` : 'Не підв\'язано'}
                       </div>
                     </div>

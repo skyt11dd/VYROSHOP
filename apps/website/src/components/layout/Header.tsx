@@ -32,12 +32,11 @@ export function Header() {
     try {
       const tg = (window as any).Telegram?.WebApp;
       if (tg) {
-        // If requestFullscreen is available, Telegram injects native top bar overlay.
-        // We MUST push the header down by at least 44px (safe area for buttons).
         if (typeof tg.requestFullscreen === 'function') {
-          // If the device provides exact safe area, use it (usually ~44px to 54px), else default to 44px
           const safeTop = tg.contentSafeAreaInset?.top || tg.safeAreaInset?.top || 44;
-          setTgPadding(safeTop > 0 ? safeTop : 44);
+          const padding = safeTop > 0 ? safeTop : 44;
+          setTgPadding(padding);
+          document.documentElement.style.setProperty('--tg-safe-top', `${padding}px`);
         }
       }
     } catch (e) {}
@@ -47,10 +46,7 @@ export function Header() {
 
   return (
     <>
-      <header 
-        className={`${styles.header} ${scrolled ? styles.scrolled : ''} animate-fade-in`}
-        style={tgPadding > 0 ? { paddingTop: `${tgPadding}px`, height: `calc(var(--header-height) + ${tgPadding}px)` } : undefined}
-      >
+      <header className={`${styles.header} ${scrolled ? styles.scrolled : ''} animate-fade-in`}>
         <div className={`container ${styles.inner}`}>
           {/* Mobile menu toggle */}
           <button className={`${styles.menuBtn} btn btn-ghost btn-icon`} onClick={() => setMobileOpen(true)} aria-label="Меню">

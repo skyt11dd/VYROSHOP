@@ -4,9 +4,9 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  /* Ensure header doesn't overlap with iOS notch */
-  padding-top: env(safe-area-inset-top, 0px);
-  height: calc(var(--header-height) + env(safe-area-inset-top, 0px));
+  /* Ensure header doesn't overlap with iOS notch or Telegram safe area */
+  padding-top: calc(env(safe-area-inset-top, 0px) + var(--tg-safe-top));
+  height: calc(var(--base-header-height) + env(safe-area-inset-top, 0px) + var(--tg-safe-top));
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
